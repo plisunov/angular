@@ -1,0 +1,19 @@
+.cources-body {
+  background: darkgray;
+  box-sizing: border-box;
+  min-height: 100px;
+  margin: 10px;
+}
+
+.add-button {
+  width: 10%;
+  float: right;
+  margin: 10px;
+  background: darkgreen;
+  color: aquamarine;
+}
+
+.item-list {
+  margin-top: 50px;
+}
+

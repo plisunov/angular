@@ -1,0 +1,7 @@
+.cources-body {
+  background: darkgray;
+  box-sizing: border-box;
+  height: 500px;
+  margin: 10px;
+  overflow: auto;
+}

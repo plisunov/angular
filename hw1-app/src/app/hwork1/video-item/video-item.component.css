@@ -1,0 +1,47 @@
+.ap-item {
+  height: 90px;
+  margin: 20px;
+  background: aliceblue;
+}
+
+.cource-container {
+  width: 80%;
+  height: 90px;
+  float: left;
+}
+
+.cource-actions {
+  width: 20%;
+  height: 90px;
+  float: left;
+}
+
+.cource-button {
+  margin-top: 30px;
+  height: 30px;
+  background: darkgreen;
+  color: aquamarine;
+}
+
+.cource-name {
+  font-weight: bold;
+  font-size: medium;
+  margin-left: 20px;
+}
+.cources-duration {
+  margin-left: 20px;
+}
+.cource-date {
+  margin-left: 10px;
+}
+.cource-description {
+  display: block;
+  margin-left: 5px;
+}
+
+.small-icon {
+  background: none;
+  max-height: 15px;
+  max-width: 15px;
+  margin: 2px;
+}

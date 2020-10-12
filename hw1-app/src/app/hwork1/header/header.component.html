@@ -1,0 +1,10 @@
+<div class="ap-header">
+  <div class="ap-header-left">
+    <app-logo></app-logo>
+  </div>
+  <div class="ap-header-right">
+    <img class="user-icon" src="assets/img/user.png">
+    <label class="user-name">{{loggedUser.firstName}}, {{loggedUser.lastName}} </label>
+    <button type="button" class="logout-button" (click)="onClick()">Log Out</button>
+  </div>
+</div>

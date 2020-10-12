@@ -1,0 +1,34 @@
+.ap-header {
+  height: 40px;
+  background: darkslategray;
+}
+
+.user-icon {
+  max-width: 30px;
+  max-width: 30px;
+  margin: 5px;
+}
+
+.user-name {
+  height: 80%;
+  color: aliceblue;
+  margin: 5px;
+}
+
+.ap-header-left {
+  width: 75%;
+  float: left;
+}
+
+.ap-header-right {
+  width: 25%;
+  float: left;
+}
+
+.logout-button {
+  background: none;
+  border: none;
+  color: aliceblue;
+  max-height: 30px;
+  margin: 5px;
+}

@@ -1,0 +1,9 @@
+<div>
+  <app-search></app-search>
+  <div>
+    <button type="button" class="add-button" (click)="addItem()">+Add Cource</button>
+  </div>
+  <div class="item-list">
+    <app-video-item *ngFor="let video of videoItems" [video]="video"></app-video-item>
+  </div>
+</div>
