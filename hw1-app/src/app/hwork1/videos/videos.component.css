@@ -17,3 +17,16 @@
   margin-top: 50px;
 }
 
+.add-more-sector {
+  height: 30px;
+  margin: 20px;
+  background: aliceblue;
+}
+
+.add-more-button {
+  background: none;
+  color: blue;
+  border: none;
+  margin-left: 45%;
+}
+

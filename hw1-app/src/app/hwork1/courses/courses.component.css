@@ -5,3 +5,7 @@
   margin: 10px;
   overflow: auto;
 }
+
+.ap-breadcrumb-item {
+  list-style-type: none;
+}

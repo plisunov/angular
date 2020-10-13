@@ -35,7 +35,7 @@ export class VideosComponent implements OnInit {
       {
         id: "cource3",
         title: "Name3",
-        description: "Description3",
+        description: "Description3Description3Description3Description3Description3Description3Description3Description3Description3Description3 Description3Description3Description3Description3Description3Description3Description3Description3",
         creationDate: new Date(),
         duration: 120
       }
