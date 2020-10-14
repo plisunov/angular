@@ -14,8 +14,7 @@ import {Hwork1Module} from "./hwork1/hwork1.module";
     AppRoutingModule,
     Hwork1Module
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: []
 })
 export class AppModule {
 }
