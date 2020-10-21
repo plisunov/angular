@@ -1,13 +1,19 @@
+.logo-container{
+  position: relative;
+}
+
 .logo-img {
   max-height: 30px;
   max-width: 30px;
   margin: 5px;
 }
 
-.logo-text {
+.logo-container .logo-text {
   max-height: 30px;
   max-width: 30%;
   font-size: medium;
   font-weight: bold;
   color: aliceblue;
+  position: absolute;
+  margin-top: 10px;
 }

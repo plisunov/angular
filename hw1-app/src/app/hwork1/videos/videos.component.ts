@@ -1,6 +1,5 @@
-import {Component, ContentChild, OnInit} from '@angular/core';
-import {VideoItem} from "../model/video-item";
-import {VideoItemComponent} from "../video-item/video-item.component";
+import {Component, OnInit} from '@angular/core';
+import {VideoItem} from '../model/video-item';
 
 @Component({
   selector: 'app-videos',
@@ -18,31 +17,20 @@ export class VideosComponent implements OnInit {
 
   ngOnInit(): void {
     this.videoItems = [
-      {
-        id: "cource1",
-        title: "Name1",
-        description: "Description1",
-        creationDate: new Date(),
-        duration: 30
-      },
-      {
-        id: "cource2",
-        title: "Name2",
-        description: "Description2",
-        creationDate: new Date(),
-        duration: 90
-      },
-      {
-        id: "cource3",
-        title: "Name3",
-        description: "Description3Description3Description3Description3Description3Description3Description3Description3Description3Description3 Description3Description3Description3Description3Description3Description3Description3Description3",
-        creationDate: new Date(),
-        duration: 120
-      }
-    ]
+      new VideoItem(1, 'Name1', 'Description1', 30, new Date()),
+      new VideoItem(2, 'Name2', 'Description2', 60, new Date()),
+      new VideoItem(3, 'Name3', 'Description3', 90, new Date())];
   }
 
-  addItem() {
-    alert("TBD")
+  addItem(): void {
+    console.log('Add new course button');
+  }
+
+  onShowMore(): void {
+    console.log('Show more button was pressed');
+  }
+
+  onDelete($event: number): void {
+    console.log('Deleted video id is ' + $event);
   }
 }
