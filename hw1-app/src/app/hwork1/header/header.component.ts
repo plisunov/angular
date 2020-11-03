@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from "../model/user";
+import {User} from '../model/user';
 
 @Component({
   selector: 'app-header',
@@ -15,11 +15,11 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loggedUser = {id: "user1", firstName: "Ivan", lastName: "Ivanov"};
+    this.loggedUser = new User(1, 'Ivan', 'Ivanov');
   }
 
   onClick(): void {
-    alert("Log out")
+    console.log('LogOut button pressed');
   }
 
 }

@@ -4,9 +4,9 @@
     <button type="button" class="add-button" (click)="addItem()">+Add Cource</button>
   </div>
   <div class="item-list">
-    <app-video-item *ngFor="let video of videoItems" [video]="video"></app-video-item>
+    <app-video-item (deleteEvent)="onDelete($event)" *ngFor="let video of videoItems" [video]="video"></app-video-item>
     <div class="add-more-sector">
-      <button class="add-more-button" type="button">Load more</button>
+      <button class="add-more-button" type="button" (click)="onShowMore()">Load more</button>
     </div>
   </div>
 </div>

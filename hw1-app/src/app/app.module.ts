@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {Hwork1Module} from "./hwork1/hwork1.module";
+import {Hwork1Module} from './hwork1/hwork1.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +14,8 @@ import {Hwork1Module} from "./hwork1/hwork1.module";
     AppRoutingModule,
     Hwork1Module
   ],
-  providers: []
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

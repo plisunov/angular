@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {VideoItem} from "../model/video-item";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {VideoItem} from '../model/video-item';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-video-item',
@@ -11,17 +12,22 @@ export class VideoItemComponent implements OnInit {
   @Input()
   public video: VideoItem;
 
-  constructor() {
+  @Output()
+  public deleteEvent: EventEmitter<number> = new EventEmitter<number>();
+
+
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
   }
 
-  onCourceEdit() {
-    alert("TBD");
+  onCourseEdit(): void {
+    console.log('Go to Course view');
+    this.router.navigate(['/course', this.video.id]);
   }
 
-  onCourceDelete() {
-    alert("TBD");
+  onCourseDelete(): void {
+    this.deleteEvent.emit(this.video.id);
   }
 }

@@ -1,12 +1,12 @@
 <div class="ap-item">
   <div class="cource-container">
-    <label class="cource-name">{{video.title}}</label>
-    <label class="cources-duration"> <img class="small-icon" src="assets/img/clock.png">{{video.duration}}</label>
-    <label class="cource-date"> <img class="small-icon" src="assets/img/calendar.png">{{video.creationDate}}</label>
-    <label class="cource-description"> {{video.description}}</label>
+    <label class="cource-name">{{video?.title}}</label>
+    <label class="cources-duration"> <img class="small-icon" src="assets/img/clock.png">{{video?.duration}}</label>
+    <label class="cource-date"> <img class="small-icon" src="assets/img/calendar.png">{{video?.creationDate}}</label>
+    <label class="cource-description"> {{video?.description}}</label>
   </div>
   <div class="cource-actions">
-    <button type="button" class="cource-button" (click)="onCourceEdit()">Edit</button>
-    <button type="button" class="cource-button" (click)="onCourceDelete()">Delete</button>
+    <button type="button" class="cource-button" (click)="onCourseEdit()">Edit</button>
+    <button type="button" class="cource-button" (click)="onCourseDelete()">Delete</button>
   </div>
 </div>
