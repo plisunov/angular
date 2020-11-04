@@ -22,4 +22,13 @@ describe('SearchComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should log in the console', () => {
+    const testSearchString = 'test course';
+    spyOn(window.console, 'log');
+    component.searchString = testSearchString;
+    component.onSearch();
+    expect(window.console.log).toHaveBeenCalledWith('Search string is ' + testSearchString);
+  });
+
 });
