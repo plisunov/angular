@@ -1,5 +1,6 @@
 .ap-item {
   height: 90px;
+  border: 5px solid aliceblue;
   margin: 20px;
   background: aliceblue;
 }
@@ -28,12 +29,15 @@
   font-size: medium;
   margin-left: 20px;
 }
+
 .cources-duration {
   margin-left: 20px;
 }
+
 .cource-date {
   margin-left: 10px;
 }
+
 .cource-description {
   display: block;
   margin-left: 5px;
@@ -44,4 +48,8 @@
   max-height: 15px;
   max-width: 15px;
   margin: 2px;
+}
+
+.top-rated {
+  background-color: darkgoldenrod;
 }

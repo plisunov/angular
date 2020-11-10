@@ -4,6 +4,7 @@ export interface IVideoItem {
   description: string;
   duration: number;
   creationDate: Date;
+  topRated: boolean;
 
 }
 
@@ -12,7 +13,8 @@ export class VideoItem implements IVideoItem {
               public title: string,
               public description: string,
               public duration: number,
-              public creationDate: Date) {
+              public creationDate: Date,
+              public topRated: boolean) {
   }
 
 }

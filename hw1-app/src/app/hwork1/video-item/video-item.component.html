@@ -1,8 +1,9 @@
-<div class="ap-item">
+<div appBorderStyle [creationDate]="video?.creationDate" [ngClass]="{'top-rated': video?.topRated}" class="ap-item">
   <div class="cource-container">
-    <label class="cource-name">{{video?.title}}</label>
-    <label class="cources-duration"> <img class="small-icon" src="assets/img/clock.png">{{video?.duration}}</label>
-    <label class="cource-date"> <img class="small-icon" src="assets/img/calendar.png">{{video?.creationDate}}</label>
+    <label class="cource-name">{{video?.title | uppercase}}</label>
+    <label *ngIf="video?.topRated"> <img class="small-icon" src="assets/img/star.png"></label>
+    <label class="cources-duration"> <img class="small-icon" src="assets/img/clock.png">{{video?.duration| timeformat}}</label>
+    <label class="cource-date"> <img class="small-icon" src="assets/img/calendar.png">{{video?.creationDate| date}}</label>
     <label class="cource-description"> {{video?.description}}</label>
   </div>
   <div class="cource-actions">

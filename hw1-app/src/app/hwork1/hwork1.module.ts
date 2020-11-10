@@ -10,11 +10,25 @@ import {LogoComponent} from './logo/logo.component';
 import {FormsModule} from '@angular/forms';
 import {CourseComponent} from './course/course.component';
 import {RouterModule} from '@angular/router';
+import {BorderStyleDirective} from './video-item/border-style.directive';
+import { TimeformatPipe } from './pipes/timeformat.pipe';
+import { OrderCourcesPipe } from './pipes/order-cources.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
 
 
 @NgModule({
-  declarations: [CoursesComponent, VideosComponent, HeaderComponent,
-    FooterComponent, VideoItemComponent, SearchComponent, LogoComponent, CourseComponent],
+  declarations: [CoursesComponent,
+    VideosComponent,
+    HeaderComponent,
+    FooterComponent,
+    VideoItemComponent,
+    SearchComponent,
+    LogoComponent,
+    CourseComponent,
+    BorderStyleDirective,
+    TimeformatPipe,
+    OrderCourcesPipe,
+    FilterPipe],
   exports: [
     CoursesComponent
   ],
