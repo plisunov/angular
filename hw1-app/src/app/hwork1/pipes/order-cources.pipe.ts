@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {VideoItem} from "../model/video-item";
+import {VideoItem} from '../model/video-item';
 
 @Pipe({
   name: 'orderCources'

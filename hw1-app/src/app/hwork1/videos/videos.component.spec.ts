@@ -3,6 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {VideosComponent} from './videos.component';
 import {OrderCourcesPipe} from '../pipes/order-cources.pipe';
 
+
 describe('VideosComponent', () => {
   let component: VideosComponent;
   let fixture: ComponentFixture<VideosComponent>;
@@ -47,6 +48,6 @@ describe('VideosComponent', () => {
     spyOn(component.filterPipe, 'transform');
     component.onSearchStringChanged('searchString');
     expect(component.filterPipe.transform).toHaveBeenCalled();
-  })
+  });
 
 });

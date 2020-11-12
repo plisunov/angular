@@ -1,7 +1,7 @@
 import {BorderStyleDirective} from './border-style.directive';
-import {Component, ElementRef} from "@angular/core";
-import {TestBed} from "@angular/core/testing";
-import {By} from "@angular/platform-browser";
+import {Component, ElementRef} from '@angular/core';
+import {TestBed} from '@angular/core/testing';
+import {By} from '@angular/platform-browser';
 
 describe('BorderStyleDirective', () => {
   let fixture;
@@ -10,7 +10,7 @@ describe('BorderStyleDirective', () => {
 
   beforeEach(() => {
     jasmine.clock().install();
-    jasmine.clock().mockDate(new Date('2020-10-01'))
+    jasmine.clock().mockDate(new Date('2020-10-01'));
     fixture = TestBed.configureTestingModule({
       declarations: [TestComponent, BorderStyleDirective]
     }).createComponent(TestComponent);
@@ -20,7 +20,7 @@ describe('BorderStyleDirective', () => {
 
   afterEach(() => {
     jasmine.clock().uninstall();
-  })
+  });
 
   it('should create an instance', () => {
     const directive = new BorderStyleDirective(new MockElementRef());
@@ -38,7 +38,6 @@ describe('BorderStyleDirective', () => {
   it('should not apply any border style for old element', () => {
     expect(mockDiv[2].nativeElement.style.borderColor).toEqual('');
   });
-
 
 });
 

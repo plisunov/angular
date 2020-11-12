@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {VideoItem} from '../model/video-item';
-import {FilterPipe} from "../pipes/filter.pipe";
+import {FilterPipe} from '../pipes/filter.pipe';
 
 @Component({
   selector: 'app-videos',

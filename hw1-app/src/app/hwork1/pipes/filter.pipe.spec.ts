@@ -1,5 +1,5 @@
 import {FilterPipe} from './filter.pipe';
-import {VideoItem} from "../model/video-item";
+import {VideoItem} from '../model/video-item';
 
 describe('FilterPipe', () => {
   it('create an instance', () => {
@@ -13,8 +13,8 @@ describe('FilterPipe', () => {
       new VideoItem(1, 'aaa', 'description', 50, new Date(), true),
       new VideoItem(2, 'bbb', 'description', 50, new Date(), true),
       new VideoItem(3, 'ccc', 'description', 50, new Date(), true),
-      new VideoItem(4, 'ddd', 'description', 50, new Date(), true)]
-    let filteredItems = pipe.transform(unFilteredItems, 'aaa');
+      new VideoItem(4, 'ddd', 'description', 50, new Date(), true)];
+    const filteredItems = pipe.transform(unFilteredItems, 'aaa');
     expect(filteredItems.length).toEqual(1);
   });
 
@@ -24,8 +24,8 @@ describe('FilterPipe', () => {
       new VideoItem(1, 'aaa', 'description', 50, new Date(), true),
       new VideoItem(2, 'bbb', 'description', 50, new Date(), true),
       new VideoItem(3, 'cccaaa', 'description', 50, new Date(), true),
-      new VideoItem(4, 'aaaddd', 'description', 50, new Date(), true)]
-    let filteredItems = pipe.transform(unFilteredItems, 'aaa');
+      new VideoItem(4, 'aaaddd', 'description', 50, new Date(), true)];
+    const filteredItems = pipe.transform(unFilteredItems, 'aaa');
     expect(filteredItems.length).toEqual(3);
   });
 
@@ -35,8 +35,8 @@ describe('FilterPipe', () => {
       new VideoItem(1, 'aaa', 'description', 50, new Date(), true),
       new VideoItem(2, 'bbb', 'description', 50, new Date(), true),
       new VideoItem(3, 'cccaaa', 'description', 50, new Date(), true),
-      new VideoItem(4, 'aaaddd', 'description', 50, new Date(), true)]
-    let filteredItems = pipe.transform(unFilteredItems, 'gggg');
+      new VideoItem(4, 'aaaddd', 'description', 50, new Date(), true)];
+    const filteredItems = pipe.transform(unFilteredItems, 'gggg');
     expect(filteredItems.length).toEqual(0);
   });
 
@@ -46,8 +46,8 @@ describe('FilterPipe', () => {
       new VideoItem(1, 'aaa', 'description', 50, new Date(), true),
       new VideoItem(2, 'bbb', 'description', 50, new Date(), true),
       new VideoItem(3, 'cccaaa', 'description', 50, new Date(), true),
-      new VideoItem(4, 'aaaddd', 'description', 50, new Date(), true)]
-    let filteredItems = pipe.transform(unFilteredItems);
+      new VideoItem(4, 'aaaddd', 'description', 50, new Date(), true)];
+    const filteredItems = pipe.transform(unFilteredItems);
     expect(filteredItems.length).toEqual(4);
   });
 

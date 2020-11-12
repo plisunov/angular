@@ -3,8 +3,8 @@ import {VideoItemComponent} from './video-item.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {VideoItem} from '../model/video-item';
 import {Router} from '@angular/router';
-import {OrderCourcesPipe} from "../pipes/order-cources.pipe";
-import {TimeformatPipe} from "../pipes/timeformat.pipe";
+import {OrderCourcesPipe} from '../pipes/order-cources.pipe';
+import {TimeformatPipe} from '../pipes/timeformat.pipe';
 
 describe('VideoItemComponent', () => {
   let component: VideoItemComponent;
