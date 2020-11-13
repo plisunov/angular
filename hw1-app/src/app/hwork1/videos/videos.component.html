@@ -1,12 +1,17 @@
 <div>
-  <app-search></app-search>
+  <app-search (searchStringOnChange)="onSearchStringChanged($event)"></app-search>
   <div>
     <button type="button" class="add-button" (click)="addItem()">+Add Cource</button>
   </div>
-  <div class="item-list">
-    <app-video-item (deleteEvent)="onDelete($event)" *ngFor="let video of videoItems" [video]="video"></app-video-item>
-    <div class="add-more-sector">
+  <div  *ngIf="filteredVideoItems?.length" class="item-list">
+    <app-video-item (deleteEvent)="onDelete($event)" *ngFor="let video of filteredVideoItems | orderCources" [video]="video"></app-video-item>
+    <div *ngIf="filteredVideoItems?.length >= 3" class="add-more-sector">
       <button class="add-more-button" type="button" (click)="onShowMore()">Load more</button>
+    </div>
+  </div>
+  <div >
+    <div *ngIf="filteredVideoItems?.length === 0" class="add-more-sector">
+      <p class="no-more-label">No data. Feel free to add new course</p>
     </div>
   </div>
 </div>

@@ -3,6 +3,8 @@ import {VideoItemComponent} from './video-item.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {VideoItem} from '../model/video-item';
 import {Router} from '@angular/router';
+import {OrderCourcesPipe} from '../pipes/order-cources.pipe';
+import {TimeformatPipe} from '../pipes/timeformat.pipe';
 
 describe('VideoItemComponent', () => {
   let component: VideoItemComponent;
@@ -11,7 +13,7 @@ describe('VideoItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [VideoItemComponent],
+      declarations: [VideoItemComponent, OrderCourcesPipe, TimeformatPipe],
       imports: [RouterTestingModule]
     })
       .compileComponents();
@@ -31,27 +33,27 @@ describe('VideoItemComponent', () => {
 
   it('should be logged', () => {
     spyOn(window.console, 'log');
-    component.video = new VideoItem(23, 'Test', '', 25, new Date());
+    component.video = new VideoItem(23, 'Test', '', 25, new Date(), true);
     component.onCourseEdit();
     expect(window.console.log).toHaveBeenCalled();
   });
 
   it('should log message on edit course button click', () => {
     spyOn(window.console, 'log');
-    component.video = new VideoItem(23, 'Test', '', 25, new Date());
+    component.video = new VideoItem(23, 'Test', '', 25, new Date(), true);
     component.onCourseEdit();
     expect(window.console.log).toHaveBeenCalled();
   });
 
   it('should navigate  to course edit on edit course button click', () => {
     spyOn(router, 'navigate');
-    component.video = new VideoItem(23, 'Test', '', 25, new Date());
+    component.video = new VideoItem(23, 'Test', '', 25, new Date(), true);
     component.onCourseEdit();
     expect(router.navigate).toHaveBeenCalled();
   });
 
-  it('deleet event should be emit on delete course button click', () => {
-    component.video = new VideoItem(23, 'Test', '', 25, new Date());
+  it('delete event should be emit on delete course button click', () => {
+    component.video = new VideoItem(23, 'Test', '', 25, new Date(), true);
     spyOn(component.deleteEvent, 'emit');
     component.onCourseDelete();
     expect(component.deleteEvent.emit).toHaveBeenCalledWith(23);

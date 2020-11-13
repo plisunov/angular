@@ -1,6 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { VideosComponent } from './videos.component';
+import {VideosComponent} from './videos.component';
+import {OrderCourcesPipe} from '../pipes/order-cources.pipe';
+
 
 describe('VideosComponent', () => {
   let component: VideosComponent;
@@ -8,9 +10,9 @@ describe('VideosComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VideosComponent ]
+      declarations: [VideosComponent, OrderCourcesPipe]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -41,4 +43,11 @@ describe('VideosComponent', () => {
     component.addItem();
     expect(window.console.log).toHaveBeenCalled();
   });
+
+  it('should call filter pipe on search string changed', () => {
+    spyOn(component.filterPipe, 'transform');
+    component.onSearchStringChanged('searchString');
+    expect(component.filterPipe.transform).toHaveBeenCalled();
+  });
+
 });
