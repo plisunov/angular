@@ -1,12 +1,12 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {VideoItem} from '../model/video-item';
+import {IVideoItem, VideoItem} from '../model/video-item';
 
 @Pipe({
   name: 'filter'
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(videos: VideoItem[], ...args: string[]): VideoItem[] {
+  transform(videos: IVideoItem[], ...args: string[]): IVideoItem[] {
     const searchString = args[0];
     if (!searchString) {
       return videos;

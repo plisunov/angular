@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {VideoItem} from '../model/video-item';
 import {FilterPipe} from '../pipes/filter.pipe';
+import {CourceService} from '../services/cource.service';
 
 @Component({
   selector: 'app-videos',
@@ -9,25 +10,17 @@ import {FilterPipe} from '../pipes/filter.pipe';
 })
 export class VideosComponent implements OnInit {
 
-  public videoItems: VideoItem[];
-
   public filteredVideoItems: VideoItem[];
 
   public video: VideoItem;
 
   public filterPipe = new FilterPipe();
 
-  constructor() {
+  constructor(private courcesService: CourceService) {
   }
 
   ngOnInit(): void {
-    const today = new Date();
-    const dayInMSec = 1000 * 60 * 60 * 24;
-    this.videoItems = [
-      new VideoItem(1, 'UPPERCASE NAME 1', 'Description1', 30, new Date(today.getTime() - (2 * dayInMSec)), false),
-      new VideoItem(2, 'lowercase name 2', 'Description2', 60, new Date(today.getTime() - (15 * dayInMSec)), true),
-      new VideoItem(3, 'camelCase Name 3', 'Description3', 90, new Date(today.getTime() + (2 * dayInMSec)), true)];
-    this.filteredVideoItems = this.videoItems;
+    this.filteredVideoItems = this.courcesService.getAll();
   }
 
   addItem(): void {
@@ -35,7 +28,7 @@ export class VideosComponent implements OnInit {
   }
 
   onSearchStringChanged(searchString: string): void {
-    this.filteredVideoItems = this.filterPipe.transform(this.videoItems, searchString);
+    this.filteredVideoItems = this.filterPipe.transform(this.courcesService.getAll(), searchString);
   }
 
   onShowMore(): void {
@@ -43,6 +36,11 @@ export class VideosComponent implements OnInit {
   }
 
   onDelete($event: number): void {
-    console.log('Deleted video id is ' + $event);
+    const deleteItem: VideoItem = this.courcesService.get($event);
+    const confirmation = confirm('Are you really wan to delete ' + deleteItem.title + '?');
+    if (confirmation) {
+      console.log('Deleted video id is ' + $event);
+      this.courcesService.delete($event);
+    }
   }
 }
