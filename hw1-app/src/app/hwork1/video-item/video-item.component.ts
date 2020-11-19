@@ -1,11 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {VideoItem} from '../model/video-item';
 import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-video-item',
   templateUrl: './video-item.component.html',
-  styleUrls: ['./video-item.component.css']
+  styleUrls: ['./video-item.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VideoItemComponent implements OnInit {
 

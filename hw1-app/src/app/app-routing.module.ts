@@ -6,6 +6,7 @@ import {CoursesComponent} from './hwork1/courses/courses.component';
 
 const routes: Routes = [
   {path: 'course/:id', component: CourseComponent},
+  {path: 'course', component: CourseComponent},
   {path: 'list', component: CoursesComponent},
   {path: '', component: LoginComponent}];
 

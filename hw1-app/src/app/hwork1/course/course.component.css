@@ -1,0 +1,28 @@
+.input-label {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 16pt;
+  margin-left: 10px;
+  display: block;
+}
+
+.input-text{
+  display: block;
+  margin-left: 5px;
+  width: 90%;
+  height: 30px;
+}
+
+.input-teat-area {
+  display: block;
+  margin-left: 5px;
+  width: 90%;
+  height: 60px;
+}
+
+.button-section {
+  display: block;
+  margin-top: 5px;
+  text-align: center;
+}
+

@@ -30,6 +30,10 @@ export class CourceService {
   }
 
   public create(cource: IVideoItem): IVideoItem {
+    // Fake integration to get id;
+    const maxId: number = this.videoItems.map((item) => item.id).reduce((a, b) => Math.max(a, b));
+    cource.id = maxId + 1;
+    // End fake integration to get id
     this.videoItems.push(cource);
     return cource;
   }

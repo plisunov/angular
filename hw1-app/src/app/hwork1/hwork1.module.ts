@@ -15,6 +15,9 @@ import { TimeformatPipe } from './pipes/timeformat.pipe';
 import { OrderCourcesPipe } from './pipes/order-cources.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { LoginComponent } from './login/login.component';
+import { DatepickerComponent } from './course/datepicker/datepicker.component';
+import { DurationComponent } from './course/duration/duration.component';
+import { TagsComponent } from './course/tags/tags.component';
 
 
 @NgModule({
@@ -30,7 +33,10 @@ import { LoginComponent } from './login/login.component';
     TimeformatPipe,
     OrderCourcesPipe,
     FilterPipe,
-    LoginComponent],
+    LoginComponent,
+    DatepickerComponent,
+    DurationComponent,
+    TagsComponent],
   exports: [
     CoursesComponent
   ],
