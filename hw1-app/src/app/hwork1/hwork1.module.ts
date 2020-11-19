@@ -14,6 +14,7 @@ import {BorderStyleDirective} from './video-item/border-style.directive';
 import { TimeformatPipe } from './pipes/timeformat.pipe';
 import { OrderCourcesPipe } from './pipes/order-cources.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     BorderStyleDirective,
     TimeformatPipe,
     OrderCourcesPipe,
-    FilterPipe],
+    FilterPipe,
+    LoginComponent],
   exports: [
     CoursesComponent
   ],

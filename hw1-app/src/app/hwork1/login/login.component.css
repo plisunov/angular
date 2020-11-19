@@ -1,0 +1,40 @@
+.login-back {
+  background-color: #555555;
+  width: 100%;
+  height: 90vh;
+}
+
+.dataDiv {
+  background-color: #bbbbbb;
+  width: 40%;
+  height: 35%;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+}
+
+.nameInput{
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  width: 50%;
+}
+
+.passwordInput{
+  position: absolute;
+  top: 30%;
+  left: 20%;
+  width: 50%;
+}
+.inputField {
+  float: right;
+}
+
+.loginButton {
+  position: absolute;
+  top: 60%;
+  left: 40%;
+  width: 90px;
+  height: 30px;
+  text-align: center;
+}
