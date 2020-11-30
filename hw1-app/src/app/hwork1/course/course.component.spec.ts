@@ -4,64 +4,91 @@ import {CourseComponent} from './course.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CourceService} from '../services/cource.service';
+import {CoursesComponent} from '../courses/courses.component';
 
 describe('CourseComponent', () => {
   let component: CourseComponent;
   let fixture: ComponentFixture<CourseComponent>;
   let route: ActivatedRoute;
   let router: Router;
-  let courceService: CourceService;
+  let courseService: CourceService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CourseComponent],
-      providers: [CourceService],
-      imports: [RouterTestingModule]
+      providers: [CourceService, {
+        provide: ActivatedRoute,
+        useValue: {
+          snapshot: {
+            paramMap: {
+              get(): string {
+                return 'new';
+              },
+            },
+          },
+        }
+      }],
+      imports: [RouterTestingModule.withRoutes([{path: 'courses', component: CoursesComponent}])]
     })
       .compileComponents();
   });
 
-  beforeEach(() => {
+  function createAndSetupComponent(): void {
     fixture = TestBed.createComponent(CourseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    courceService = TestBed.inject(CourceService);
-    route = TestBed.inject(ActivatedRoute);
+    courseService = TestBed.inject(CourceService);
     router = TestBed.inject(Router);
     router.initialNavigation();
-  });
+    route = TestBed.inject(ActivatedRoute);
+  }
 
   it('should create', () => {
-    spyOn(route.snapshot.paramMap, 'get').and.returnValue('56');
+    createAndSetupComponent();
     expect(component).toBeTruthy();
   });
 
   it('should save a new item when Save button pressed', () => {
-    spyOn(courceService, 'create');
+    createAndSetupComponent();
+    spyOn(courseService, 'create');
     component.onSave();
-    expect(courceService.create).toHaveBeenCalled();
+    expect(courseService.create).toHaveBeenCalled();
   });
 
   it('should update an existing item when Save button pressed', () => {
-    spyOn(courceService, 'update');
-    component.videoIdStr = '15';
+    TestBed.overrideProvider(ActivatedRoute, {
+      useValue: {
+        snapshot: {
+          paramMap: {
+            get(): string {
+              return '1';
+            },
+          },
+        },
+      }
+    }).compileComponents();
+    createAndSetupComponent();
+    spyOn(courseService, 'update');
     component.onSave();
-    expect(courceService.update).toHaveBeenCalled();
+    expect(courseService.update).toHaveBeenCalled();
   });
 
   it('should navigate to the list when Save button pressed', () => {
+    createAndSetupComponent();
     spyOn(router, 'navigate');
     component.onSave();
     expect(router.navigate).toHaveBeenCalled();
   });
 
   it('should navigate to the list when Cancel button pressed', () => {
+    createAndSetupComponent();
     spyOn(router, 'navigate');
     component.onCancell();
     expect(router.navigate).toHaveBeenCalled();
   });
 
   it('should follow for changed duration', () => {
+    createAndSetupComponent();
     component.onDurationChange(50);
     expect(component.videoItem.duration).toEqual(50);
   });

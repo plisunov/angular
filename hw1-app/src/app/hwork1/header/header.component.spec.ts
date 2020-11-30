@@ -15,7 +15,7 @@ describe('HeaderComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [HeaderComponent],
       providers: [AuthService],
-      imports: [RouterTestingModule]
+      imports: [RouterTestingModule.withRoutes([])]
     })
       .compileComponents();
     authService = TestBed.inject(AuthService);

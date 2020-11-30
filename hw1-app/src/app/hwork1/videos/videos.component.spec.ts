@@ -5,6 +5,8 @@ import {OrderCourcesPipe} from '../pipes/order-cources.pipe';
 import {CourceService} from '../services/cource.service';
 import {VideoItem} from '../model/video-item';
 import {RouterTestingModule} from '@angular/router/testing';
+import {AuthService} from '../services/auth.service';
+import {CourseComponent} from '../course/course.component';
 import {Router} from '@angular/router';
 
 
@@ -13,16 +15,18 @@ describe('VideosComponent', () => {
   let fixture: ComponentFixture<VideosComponent>;
   let courcesService: CourceService;
   let router: Router;
+  let authService: AuthService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [VideosComponent, OrderCourcesPipe],
-      providers: [CourceService],
-      imports: [RouterTestingModule]
+      providers: [CourceService, AuthService],
+      imports: [RouterTestingModule.withRoutes([{path: 'courses/new', component: CourseComponent}])]
     })
       .compileComponents();
     router = TestBed.inject(Router);
     router.initialNavigation();
+    authService = TestBed.inject(AuthService);
   });
 
   beforeEach(() => {
@@ -30,6 +34,7 @@ describe('VideosComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     courcesService = TestBed.inject(CourceService);
+    spyOn(authService, 'isAuthenticated').and.returnValue(true);
   });
 
   it('should create', () => {

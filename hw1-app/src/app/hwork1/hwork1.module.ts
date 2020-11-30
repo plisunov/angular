@@ -18,6 +18,7 @@ import { LoginComponent } from './login/login.component';
 import { DatepickerComponent } from './course/datepicker/datepicker.component';
 import { DurationComponent } from './course/duration/duration.component';
 import { TagsComponent } from './course/tags/tags.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { TagsComponent } from './course/tags/tags.component';
     LoginComponent,
     DatepickerComponent,
     DurationComponent,
-    TagsComponent],
+    TagsComponent,
+    NotFoundComponent],
   exports: [
     CoursesComponent
   ],

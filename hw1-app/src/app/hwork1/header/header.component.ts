@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {IUser, User} from '../model/user';
+import {IUser} from '../model/user';
 import {AuthService} from '../services/auth.service';
 import {Router} from '@angular/router';
 
@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
     console.log('LogOut button pressed');
     this.authService.logout();
     this.loggedUser = this.authService.getUserInfo();
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
 
 }

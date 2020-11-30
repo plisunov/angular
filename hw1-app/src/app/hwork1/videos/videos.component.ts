@@ -29,7 +29,7 @@ export class VideosComponent implements OnInit {
 
   addItem(): void {
     console.log('Add new course button');
-    this.router.navigate(['/course']);
+    this.router.navigate(['/courses/new']);
   }
 
   onSearchStringChanged(searchString: string): void {

@@ -19,29 +19,33 @@ export class CourseComponent implements OnInit {
 
   public videoIdStr: string;
 
+  private editMode: boolean;
+
   ngOnInit(): void {
     this.videoIdStr = this.path.snapshot.paramMap.get('id');
-    if (this.videoIdStr) {
+    if (this.videoIdStr !== 'new') {
+      this.editMode = true;
       this.videoItem = this.courceService.get(Number(this.videoIdStr));
     } else {
+      this.editMode = false;
       this.videoItem = new VideoItem(null, null, null, 0, new Date(), false);
     }
     console.log('Try to edit video with id ' + this.videoIdStr);
   }
 
   public onSave(): void {
-    if (this.videoIdStr) {
+    if (this.editMode) {
       this.courceService.update(this.videoItem);
     } else {
       this.courceService.create(this.videoItem);
     }
     window.console.log('Saved course');
-    this.router.navigate(['/list']);
+    this.router.navigate(['/courses']);
   }
 
   public onCancell(): void {
     window.console.log('Cancel edit course');
-    this.router.navigate(['/list']);
+    this.router.navigate(['/courses']);
   }
 
   onDurationChange($event: number): void {
