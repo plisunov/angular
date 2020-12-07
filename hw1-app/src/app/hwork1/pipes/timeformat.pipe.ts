@@ -6,7 +6,9 @@ import {Pipe, PipeTransform} from '@angular/core';
 export class TimeformatPipe implements PipeTransform {
 
   transform(minutes: number): string {
-    if (minutes < 60) {
+    if (Number.isNaN(minutes)) {
+      return '';
+    } else if (minutes < 60) {
       return `${minutes} min`;
     } else if (minutes % 60 === 0) {
       return `${Math.floor(minutes / 60)} h`;

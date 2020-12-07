@@ -1,4 +1,20 @@
 <app-header></app-header>
-<p>Create/Edit course with id {{videoIdStr}}</p>
-<p>Under Construction</p>
+<div>
+  <div>
+    <label class="input-label" for="courseName">Title</label>
+    <input class="input-text" id="courseName" [(ngModel)]="videoItem.title">
+  </div>
+  <div>
+    <label class="input-label" for="courseDescription">Description</label>
+    <textarea class="input-teat-area" id="courseDescription" ngModel="{{videoItem.description}}"></textarea>
+  </div>
+  <app-datepicker [courseDate]="videoItem.creationDate"></app-datepicker>
+  <app-duration (changeEvent)="onDurationChange($event)" [duration]="videoItem.duration"></app-duration>
+  <app-tags></app-tags>
+  <div class="button-section">
+    <input type="button" value="Save" (click)="onSave()">
+    <input type="button" value="Cancel" (click)="onCancell()">
+
+  </div>
+</div>
 <app-footer></app-footer>

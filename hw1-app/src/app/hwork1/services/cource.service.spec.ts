@@ -25,10 +25,10 @@ describe('CourceService', () => {
   });
 
   it('should create a new item', () => {
-    const newItem: IVideoItem = new VideoItem(5, 'New Item', '', 90, new Date(), false);
+    const newItem: IVideoItem = new VideoItem(null, 'New Item', '', 90, new Date(), false);
     service.create(newItem);
     expect(service.getAll().length).toEqual(4);
-    expect(service.get(5).title).toEqual('New Item');
+    expect(service.get(4).title).toEqual('New Item');
   });
 
   it('should update an existing item', () => {

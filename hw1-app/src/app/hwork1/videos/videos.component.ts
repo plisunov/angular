@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {VideoItem} from '../model/video-item';
 import {FilterPipe} from '../pipes/filter.pipe';
 import {CourceService} from '../services/cource.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-videos',
@@ -16,7 +17,10 @@ export class VideosComponent implements OnInit {
 
   public filterPipe = new FilterPipe();
 
-  constructor(private courcesService: CourceService) {
+  private searchString: string;
+
+  constructor(private courcesService: CourceService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -25,10 +29,12 @@ export class VideosComponent implements OnInit {
 
   addItem(): void {
     console.log('Add new course button');
+    this.router.navigate(['/course']);
   }
 
   onSearchStringChanged(searchString: string): void {
     this.filteredVideoItems = this.filterPipe.transform(this.courcesService.getAll(), searchString);
+    this.searchString = searchString;
   }
 
   onShowMore(): void {
@@ -41,6 +47,7 @@ export class VideosComponent implements OnInit {
     if (confirmation) {
       console.log('Deleted video id is ' + $event);
       this.courcesService.delete($event);
+      this.filteredVideoItems = this.filterPipe.transform(this.courcesService.getAll(), this.searchString);
     }
   }
 }

@@ -7,6 +7,13 @@ describe('TimeformatPipe', () => {
     expect(pipe).toBeTruthy();
   });
 
+  it('should return empty string for NaN', () => {
+    const videoItem = new VideoItem(1, 'aaa', 'description', Number.NaN, new Date(), true);
+    const pipe = new TimeformatPipe();
+    const stringDuration = pipe.transform(videoItem.duration);
+    expect(stringDuration).toEqual('');
+  });
+
   it('should return minutes for less then 1 hour course', () => {
     const videoItem = new VideoItem(1, 'aaa', 'description', 50, new Date(), true);
     const pipe = new TimeformatPipe();

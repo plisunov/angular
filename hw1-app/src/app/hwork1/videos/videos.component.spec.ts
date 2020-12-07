@@ -4,19 +4,25 @@ import {VideosComponent} from './videos.component';
 import {OrderCourcesPipe} from '../pipes/order-cources.pipe';
 import {CourceService} from '../services/cource.service';
 import {VideoItem} from '../model/video-item';
+import {RouterTestingModule} from '@angular/router/testing';
+import {Router} from '@angular/router';
 
 
 describe('VideosComponent', () => {
   let component: VideosComponent;
   let fixture: ComponentFixture<VideosComponent>;
   let courcesService: CourceService;
+  let router: Router;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [VideosComponent, OrderCourcesPipe],
-      providers: [CourceService]
+      providers: [CourceService],
+      imports: [RouterTestingModule]
     })
       .compileComponents();
+    router = TestBed.inject(Router);
+    router.initialNavigation();
   });
 
   beforeEach(() => {

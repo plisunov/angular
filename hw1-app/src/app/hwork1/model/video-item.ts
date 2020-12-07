@@ -16,5 +16,4 @@ export class VideoItem implements IVideoItem {
               public creationDate: Date,
               public topRated: boolean) {
   }
-
 }
