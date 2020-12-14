@@ -17,37 +17,54 @@ export class VideosComponent implements OnInit {
 
   public filterPipe = new FilterPipe();
 
-  private searchString: string;
+  private searchString = '';
+
+  private pagingSize = 3;
+
+  private startIndex = 0;
+
 
   constructor(private courcesService: CourceService,
               private router: Router) {
   }
 
   ngOnInit(): void {
-    this.filteredVideoItems = this.courcesService.getAll();
+    this.courcesService.getAll(this.startIndex, this.pagingSize, this.searchString).subscribe((list) => {
+      this.filteredVideoItems = list;
+    });
   }
 
   addItem(): void {
-    console.log('Add new course button');
     this.router.navigate(['/courses/new']);
   }
 
   onSearchStringChanged(searchString: string): void {
-    this.filteredVideoItems = this.filterPipe.transform(this.courcesService.getAll(), searchString);
     this.searchString = searchString;
+    this.startIndex = 0;
+    this.courcesService.getAll(this.startIndex, this.pagingSize, this.searchString).subscribe((list) => {
+      this.filteredVideoItems = list;
+    });
   }
 
   onShowMore(): void {
-    console.log('Show more button was pressed');
+    this.startIndex = (this.startIndex + this.pagingSize) + 1;
+    this.courcesService.getAll(this.startIndex, this.pagingSize, this.searchString).subscribe((list) => {
+      this.filteredVideoItems = list;
+    });
+
   }
 
   onDelete($event: number): void {
-    const deleteItem: VideoItem = this.courcesService.get($event);
-    const confirmation = confirm('Are you really wan to delete ' + deleteItem.title + '?');
+    const deleteItem: VideoItem = this.filteredVideoItems.find(c => c.id === $event);
+    const confirmation = confirm('Are you really wan to delete ' + deleteItem.name + '?');
     if (confirmation) {
       console.log('Deleted video id is ' + $event);
       this.courcesService.delete($event);
-      this.filteredVideoItems = this.filterPipe.transform(this.courcesService.getAll(), this.searchString);
+      this.startIndex = 0;
+      this.searchString = '';
+      this.courcesService.getAll(this.startIndex, this.pagingSize, this.searchString).subscribe((list) => {
+        this.filteredVideoItems = list;
+      });
     }
   }
 }

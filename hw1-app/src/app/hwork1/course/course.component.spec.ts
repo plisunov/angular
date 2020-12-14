@@ -5,6 +5,9 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CourceService} from '../services/cource.service';
 import {CoursesComponent} from '../courses/courses.component';
+import {HttpClient} from '@angular/common/http';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {Observable} from 'rxjs';
 
 describe('CourseComponent', () => {
   let component: CourseComponent;
@@ -12,6 +15,7 @@ describe('CourseComponent', () => {
   let route: ActivatedRoute;
   let router: Router;
   let courseService: CourceService;
+  let httpClient: HttpClient;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -28,7 +32,10 @@ describe('CourseComponent', () => {
           },
         }
       }],
-      imports: [RouterTestingModule.withRoutes([{path: 'courses', component: CoursesComponent}])]
+      imports: [RouterTestingModule.withRoutes([{
+        path: 'courses',
+        component: CoursesComponent
+      }]), HttpClientTestingModule]
     })
       .compileComponents();
   });
@@ -41,6 +48,7 @@ describe('CourseComponent', () => {
     router = TestBed.inject(Router);
     router.initialNavigation();
     route = TestBed.inject(ActivatedRoute);
+    httpClient = TestBed.inject(HttpClient);
   }
 
   it('should create', () => {
@@ -50,27 +58,9 @@ describe('CourseComponent', () => {
 
   it('should save a new item when Save button pressed', () => {
     createAndSetupComponent();
-    spyOn(courseService, 'create');
+    spyOn(courseService, 'create').and.returnValue(new Observable());
     component.onSave();
     expect(courseService.create).toHaveBeenCalled();
-  });
-
-  it('should update an existing item when Save button pressed', () => {
-    TestBed.overrideProvider(ActivatedRoute, {
-      useValue: {
-        snapshot: {
-          paramMap: {
-            get(): string {
-              return '1';
-            },
-          },
-        },
-      }
-    }).compileComponents();
-    createAndSetupComponent();
-    spyOn(courseService, 'update');
-    component.onSave();
-    expect(courseService.update).toHaveBeenCalled();
   });
 
   it('should navigate to the list when Save button pressed', () => {
@@ -90,7 +80,7 @@ describe('CourseComponent', () => {
   it('should follow for changed duration', () => {
     createAndSetupComponent();
     component.onDurationChange(50);
-    expect(component.videoItem.duration).toEqual(50);
+    expect(component.videoItem.length).toEqual(50);
   });
 
 });

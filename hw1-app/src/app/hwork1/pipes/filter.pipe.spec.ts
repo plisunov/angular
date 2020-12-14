@@ -10,10 +10,10 @@ describe('FilterPipe', () => {
   it('should return one item by strict parameter', () => {
     const pipe = new FilterPipe();
     const unFilteredItems = [
-      new VideoItem(1, 'aaa', 'description', 50, new Date(), true),
-      new VideoItem(2, 'bbb', 'description', 50, new Date(), true),
-      new VideoItem(3, 'ccc', 'description', 50, new Date(), true),
-      new VideoItem(4, 'ddd', 'description', 50, new Date(), true)];
+      new VideoItem(1, 'aaa', 'description', 50, new Date(), true, null),
+      new VideoItem(2, 'bbb', 'description', 50, new Date(), true, null),
+      new VideoItem(3, 'ccc', 'description', 50, new Date(), true, null),
+      new VideoItem(4, 'ddd', 'description', 50, new Date(), true, null)];
     const filteredItems = pipe.transform(unFilteredItems, 'aaa');
     expect(filteredItems.length).toEqual(1);
   });
@@ -21,10 +21,10 @@ describe('FilterPipe', () => {
   it('should return a few items by not strict parameter', () => {
     const pipe = new FilterPipe();
     const unFilteredItems = [
-      new VideoItem(1, 'aaa', 'description', 50, new Date(), true),
-      new VideoItem(2, 'bbb', 'description', 50, new Date(), true),
-      new VideoItem(3, 'cccaaa', 'description', 50, new Date(), true),
-      new VideoItem(4, 'aaaddd', 'description', 50, new Date(), true)];
+      new VideoItem(1, 'aaa', 'description', 50, new Date(), true, null),
+      new VideoItem(2, 'bbb', 'description', 50, new Date(), true, null),
+      new VideoItem(3, 'cccaaa', 'description', 50, new Date(), true, null),
+      new VideoItem(4, 'aaaddd', 'description', 50, new Date(), true, null)];
     const filteredItems = pipe.transform(unFilteredItems, 'aaa');
     expect(filteredItems.length).toEqual(3);
   });
@@ -32,10 +32,10 @@ describe('FilterPipe', () => {
   it('should return an empty by not valid parameter', () => {
     const pipe = new FilterPipe();
     const unFilteredItems = [
-      new VideoItem(1, 'aaa', 'description', 50, new Date(), true),
-      new VideoItem(2, 'bbb', 'description', 50, new Date(), true),
-      new VideoItem(3, 'cccaaa', 'description', 50, new Date(), true),
-      new VideoItem(4, 'aaaddd', 'description', 50, new Date(), true)];
+      new VideoItem(1, 'aaa', 'description', 50, new Date(), true, null),
+      new VideoItem(2, 'bbb', 'description', 50, new Date(), true, null),
+      new VideoItem(3, 'cccaaa', 'description', 50, new Date(), true, null),
+      new VideoItem(4, 'aaaddd', 'description', 50, new Date(), true, null)];
     const filteredItems = pipe.transform(unFilteredItems, 'gggg');
     expect(filteredItems.length).toEqual(0);
   });
@@ -43,10 +43,10 @@ describe('FilterPipe', () => {
   it('should return original items if no parameter', () => {
     const pipe = new FilterPipe();
     const unFilteredItems = [
-      new VideoItem(1, 'aaa', 'description', 50, new Date(), true),
-      new VideoItem(2, 'bbb', 'description', 50, new Date(), true),
-      new VideoItem(3, 'cccaaa', 'description', 50, new Date(), true),
-      new VideoItem(4, 'aaaddd', 'description', 50, new Date(), true)];
+      new VideoItem(1, 'aaa', 'description', 50, new Date(), true, null),
+      new VideoItem(2, 'bbb', 'description', 50, new Date(), true, null),
+      new VideoItem(3, 'cccaaa', 'description', 50, new Date(), true, null),
+      new VideoItem(4, 'aaaddd', 'description', 50, new Date(), true, null)];
     const filteredItems = pipe.transform(unFilteredItems);
     expect(filteredItems.length).toEqual(4);
   });
