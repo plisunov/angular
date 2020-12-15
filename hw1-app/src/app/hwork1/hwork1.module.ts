@@ -19,6 +19,7 @@ import { DatepickerComponent } from './course/datepicker/datepicker.component';
 import { DurationComponent } from './course/duration/duration.component';
 import { TagsComponent } from './course/tags/tags.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 
 @NgModule({
@@ -38,15 +39,16 @@ import { NotFoundComponent } from './not-found/not-found.component';
     DatepickerComponent,
     DurationComponent,
     TagsComponent,
-    NotFoundComponent],
+    NotFoundComponent,
+    BreadcrumbComponent],
   exports: [
     CoursesComponent
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    RouterModule
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        RouterModule
+    ]
 })
 export class Hwork1Module {
 }
