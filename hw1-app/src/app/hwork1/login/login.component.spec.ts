@@ -15,7 +15,7 @@ describe('LoginComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [LoginComponent],
       providers: [AuthService],
-      imports: [RouterTestingModule]
+      imports: [RouterTestingModule.withRoutes([])]
     })
       .compileComponents();
     authService = TestBed.inject(AuthService);
@@ -33,13 +33,13 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call auth service',  () => {
+  it('should call auth service', () => {
     spyOn(authService, 'login');
     component.login();
     expect(authService.login).toHaveBeenCalled();
   });
 
-  it('should redirect to the list page',  () => {
+  it('should redirect to the list page', () => {
     spyOn(router, 'navigate');
     component.login();
     expect(router.navigate).toHaveBeenCalled();

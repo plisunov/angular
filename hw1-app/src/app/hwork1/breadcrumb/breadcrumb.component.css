@@ -1,0 +1,5 @@
+.ap-breadcrumb-item {
+  list-style-type: none;
+  cursor: pointer;
+  display: inline;
+}

@@ -14,7 +14,7 @@ describe('VideoItemComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [VideoItemComponent, OrderCourcesPipe, TimeformatPipe],
-      imports: [RouterTestingModule]
+      imports: [RouterTestingModule.withRoutes([])]
     })
       .compileComponents();
     router = TestBed.inject(Router);
@@ -47,7 +47,7 @@ describe('VideoItemComponent', () => {
 
   it('should navigate  to course edit on edit course button click', () => {
     spyOn(router, 'navigate');
-    component.video = new VideoItem(23, 'Test', '', 25, new Date(), true);
+    component.video = new VideoItem(2, 'Test', '', 25, new Date(), true);
     component.onCourseEdit();
     expect(router.navigate).toHaveBeenCalled();
   });

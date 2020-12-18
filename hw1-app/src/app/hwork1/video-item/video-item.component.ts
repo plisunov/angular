@@ -25,7 +25,7 @@ export class VideoItemComponent implements OnInit {
 
   onCourseEdit(): void {
     console.log('Go to Course view');
-    this.router.navigate(['/course', this.video.id]);
+    this.router.navigate(['/courses', this.video.id]);
   }
 
   onCourseDelete(): void {
