@@ -21,6 +21,7 @@ import { TagsComponent } from './course/tags/tags.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { LoaderComponent } from './loader/loader.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -46,11 +47,12 @@ import { LoaderComponent } from './loader/loader.component';
   exports: [
     CoursesComponent
   ],
-    imports: [
-        CommonModule,
-        FormsModule,
-        RouterModule
-    ]
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    MatProgressSpinnerModule
+  ]
 })
 export class Hwork1Module {
 }

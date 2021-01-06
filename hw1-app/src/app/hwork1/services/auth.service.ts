@@ -3,7 +3,7 @@ import {IUser, User} from '../model/user';
 import {HttpClient} from '@angular/common/http';
 import {AuthUser} from '../model/auth-user';
 import {environment} from '../../../environments/environment';
-import {ObservableInput} from 'rxjs';
+import {ObservableInput, Subject} from 'rxjs';
 import {mergeMap} from 'rxjs/operators';
 import {AuthToken} from '../model/auth-token';
 
@@ -26,7 +26,8 @@ export class AuthService {
     }).pipe(mergeMap((tokenResponse: AuthToken) => this.userInfoRest(tokenResponse)))
       .toPromise()
       .then((userInfo: AuthUser) => {
-        localStorage.setItem(this.BEAVER_KEY, JSON.stringify(new User(userInfo.id, userInfo.name.first, userInfo.name.last)));
+        const user = new User(userInfo.id, userInfo.name.first, userInfo.name.last);
+        localStorage.setItem(this.BEAVER_KEY, JSON.stringify(user));
       });
   }
 
