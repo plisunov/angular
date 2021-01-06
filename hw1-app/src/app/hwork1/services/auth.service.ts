@@ -1,5 +1,11 @@
 import {Injectable} from '@angular/core';
 import {IUser, User} from '../model/user';
+import {HttpClient} from '@angular/common/http';
+import {AuthUser} from '../model/auth-user';
+import {environment} from '../../../environments/environment';
+import {ObservableInput} from 'rxjs';
+import {mergeMap} from 'rxjs/operators';
+import {AuthToken} from '../model/auth-token';
 
 @Injectable({
   providedIn: 'root'
@@ -7,28 +13,47 @@ import {IUser, User} from '../model/user';
 export class AuthService {
 
   private BEAVER_KEY = 'Beaver';
+  private AUTORIZATION_TOKEN = 'Token';
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
   }
 
-  public login(): void {
-    console.log('Logged fake user');
-    localStorage.setItem(this.BEAVER_KEY, JSON.stringify(new User(4, 'Ivan', 'Ivanov')));
+  public login(login: string, password: string): Promise<void> {
+
+    return this.httpClient.post(environment.HOST_URL + '/auth/login', {
+      login,
+      password
+    }).pipe(mergeMap((tokenResponse: AuthToken) => this.userInfoRest(tokenResponse)))
+      .toPromise()
+      .then((userInfo: AuthUser) => {
+        localStorage.setItem(this.BEAVER_KEY, JSON.stringify(new User(userInfo.id, userInfo.name.first, userInfo.name.last)));
+      });
+  }
+
+  public userInfoRest(token: AuthToken): ObservableInput<AuthUser> {
+    const tokenKey = token.token;
+    localStorage.setItem(this.AUTORIZATION_TOKEN, tokenKey);
+
+    return this.httpClient.post(environment.HOST_URL + '/auth/userInfo',
+      {
+        token: tokenKey
+      });
+  }
+
+  public getToken(): string {
+    return localStorage.getItem(this.AUTORIZATION_TOKEN);
   }
 
   public logout(): void {
-    console.log('Logout fake user');
     localStorage.removeItem(this.BEAVER_KEY);
   }
 
   public isAuthenticated(): boolean {
-    console.log('Get is authenticated');
     const item: string = localStorage.getItem(this.BEAVER_KEY);
     return !!item;
   }
 
   public getUserInfo(): IUser {
-    console.log('Get logged user info');
     const item: string = localStorage.getItem(this.BEAVER_KEY);
     if (item != null) {
       return JSON.parse(item);

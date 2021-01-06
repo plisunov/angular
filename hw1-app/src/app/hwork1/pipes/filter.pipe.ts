@@ -12,7 +12,7 @@ export class FilterPipe implements PipeTransform {
       return videos;
     }
     return videos.filter((v) => {
-      return v.title.toLowerCase().includes(searchString.toLowerCase());
+      return v.name.toLowerCase().includes(searchString.toLowerCase());
     });
   }
 

@@ -8,7 +8,7 @@ export class OrderCourcesPipe implements PipeTransform {
 
   transform(videos: VideoItem[]): VideoItem[] {
     return videos.sort((a, b) =>
-      a.creationDate.getTime() - b.creationDate.getTime());
+      new Date(a.date).getTime() - new Date(b.date).getTime());
   }
 
 }

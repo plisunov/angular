@@ -33,27 +33,27 @@ describe('VideoItemComponent', () => {
 
   it('should be logged', () => {
     spyOn(window.console, 'log');
-    component.video = new VideoItem(23, 'Test', '', 25, new Date(), true);
+    component.video = new VideoItem(23, 'Test', '', 25, new Date(), true, null);
     component.onCourseEdit();
     expect(window.console.log).toHaveBeenCalled();
   });
 
   it('should log message on edit course button click', () => {
     spyOn(window.console, 'log');
-    component.video = new VideoItem(23, 'Test', '', 25, new Date(), true);
+    component.video = new VideoItem(23, 'Test', '', 25, new Date(), true, null);
     component.onCourseEdit();
     expect(window.console.log).toHaveBeenCalled();
   });
 
   it('should navigate  to course edit on edit course button click', () => {
     spyOn(router, 'navigate');
-    component.video = new VideoItem(2, 'Test', '', 25, new Date(), true);
+    component.video = new VideoItem(2, 'Test', '', 25, new Date(), true, null);
     component.onCourseEdit();
     expect(router.navigate).toHaveBeenCalled();
   });
 
   it('delete event should be emit on delete course button click', () => {
-    component.video = new VideoItem(23, 'Test', '', 25, new Date(), true);
+    component.video = new VideoItem(23, 'Test', '', 25, new Date(), true, null);
     spyOn(component.deleteEvent, 'emit');
     component.onCourseDelete();
     expect(component.deleteEvent.emit).toHaveBeenCalledWith(23);

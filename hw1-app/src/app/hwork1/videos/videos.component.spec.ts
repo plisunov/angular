@@ -3,11 +3,14 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {VideosComponent} from './videos.component';
 import {OrderCourcesPipe} from '../pipes/order-cources.pipe';
 import {CourceService} from '../services/cource.service';
-import {VideoItem} from '../model/video-item';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AuthService} from '../services/auth.service';
 import {CourseComponent} from '../course/course.component';
 import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {VideoItem} from '../model/video-item';
 
 
 describe('VideosComponent', () => {
@@ -16,15 +19,20 @@ describe('VideosComponent', () => {
   let courcesService: CourceService;
   let router: Router;
   let authService: AuthService;
+  let httpClient: HttpClient;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [VideosComponent, OrderCourcesPipe],
       providers: [CourceService, AuthService],
-      imports: [RouterTestingModule.withRoutes([{path: 'courses/new', component: CourseComponent}])]
+      imports: [RouterTestingModule.withRoutes([{
+        path: 'courses/new',
+        component: CourseComponent
+      }]), HttpClientTestingModule]
     })
       .compileComponents();
     router = TestBed.inject(Router);
+    httpClient = TestBed.inject(HttpClient);
     router.initialNavigation();
     authService = TestBed.inject(AuthService);
   });
@@ -41,46 +49,44 @@ describe('VideosComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should log message, and delete course if confirmed after delete button click', () => {
-    spyOn(window.console, 'log');
+  it('should delete course if confirmed after delete button click', () => {
+    component.filteredVideoItems = [new VideoItem(12, 'Name', 'Description', 10, new Date(), true, null)];
     spyOn(window, 'confirm').and.returnValue(true);
-    spyOn(courcesService, 'get').and.returnValue(new VideoItem(2, 'Name', 'Description', 10, new Date(), true));
+    spyOn(courcesService, 'getAll').and.returnValue(new Observable());
     spyOn(courcesService, 'delete');
     const courseId = 12;
     component.onDelete(courseId);
-    expect(window.console.log).toHaveBeenCalledWith('Deleted video id is ' + courseId);
-    expect(courcesService.get).toHaveBeenCalledWith(courseId);
-    expect(courcesService.delete).toHaveBeenCalled();
+    expect(courcesService.delete).toHaveBeenCalledWith(courseId);
+    expect(courcesService.getAll).toHaveBeenCalled();
   });
 
-  it('should not log message and dont delete course if not confirmed after delete button click', () => {
-    spyOn(window.console, 'log');
+  it('should not delete course if not confirmed after delete button click', () => {
+    component.filteredVideoItems = [new VideoItem(12, 'Name', 'Description', 10, new Date(), true, null)];
     spyOn(window, 'confirm').and.returnValue(false);
-    spyOn(courcesService, 'get').and.returnValue(new VideoItem(2, 'Name', 'Description', 10, new Date(), true));
+    spyOn(courcesService, 'getAll').and.returnValue(new Observable());
     spyOn(courcesService, 'delete');
     const courseId = 12;
     component.onDelete(courseId);
-    expect(window.console.log).toHaveBeenCalledTimes(0);
-    expect(courcesService.get).toHaveBeenCalledWith(courseId);
     expect(courcesService.delete).toHaveBeenCalledTimes(0);
+    expect(courcesService.getAll).toHaveBeenCalledTimes(0);
   });
 
-  it('should log message on show more button click', () => {
-    spyOn(window.console, 'log');
+  it('should call course service on  show more button click', () => {
+    spyOn(courcesService, 'getAll').and.returnValue(new Observable());
     component.onShowMore();
-    expect(window.console.log).toHaveBeenCalled();
+    expect(courcesService.getAll).toHaveBeenCalled();
   });
 
-  it('should log message on add course button click', () => {
-    spyOn(window.console, 'log');
+  it('should navigate to the course edit page on add course button click', () => {
+    spyOn(router, 'navigate');
     component.addItem();
-    expect(window.console.log).toHaveBeenCalled();
+    expect(router.navigate).toHaveBeenCalledWith(['/courses/new']);
   });
 
-  it('should call filter pipe on search string changed', () => {
-    spyOn(component.filterPipe, 'transform');
+  it('should call course service on search string changed', () => {
+    spyOn(courcesService, 'getAll').and.returnValue(new Observable());
     component.onSearchStringChanged('searchString');
-    expect(component.filterPipe.transform).toHaveBeenCalled();
+    expect(courcesService.getAll).toHaveBeenCalled();
   });
 
 });
