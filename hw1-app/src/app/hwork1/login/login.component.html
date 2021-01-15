@@ -3,11 +3,11 @@
   <div class="dataDiv">
     <div class="nameInput">
       <label for="name">Login </label>
-      <input id="name" class="inputField">
+      <input id="name" class="inputField" [(ngModel)]="name">
     </div>
     <div class="passwordInput">
       <label for="password">Password </label>
-      <input type="password" id="password" class="inputField">
+      <input type="password" id="password" class="inputField" [(ngModel)]="password">
     </div>
     <button class="loginButton" (click)="login()">Login</button>
   </div>

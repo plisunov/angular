@@ -4,19 +4,23 @@ import {AuthGuard} from './auth.guard';
 import {ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AuthService} from './auth.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {HttpClient} from '@angular/common/http';
 
 describe('AuthGuard', () => {
   let guard: AuthGuard;
   let router: Router;
   let authService: AuthService;
+  let httpClient: HttpClient;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, HttpClientTestingModule],
       providers: [AuthService]
     });
     guard = TestBed.inject(AuthGuard);
     router = TestBed.inject(Router);
+    httpClient = TestBed.inject(HttpClient);
     router.initialNavigation();
     authService = TestBed.inject(AuthService);
   });
