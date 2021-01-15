@@ -1,19 +1,22 @@
+import {IAutor} from './autor';
+
 export interface IVideoItem {
   id: number;
-  title: string;
+  name: string;
   description: string;
-  duration: number;
-  creationDate: Date;
-  topRated: boolean;
-
+  length: number;
+  date: Date;
+  isTopRated: boolean;
+  authors: IAutor[];
 }
 
 export class VideoItem implements IVideoItem {
   constructor(public id: number,
-              public title: string,
+              public name: string,
               public description: string,
-              public duration: number,
-              public creationDate: Date,
-              public topRated: boolean) {
+              public length: number,
+              public date: Date,
+              public isTopRated: boolean,
+              public authors: IAutor[]) {
   }
 }

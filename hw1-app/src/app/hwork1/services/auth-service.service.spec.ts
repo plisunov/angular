@@ -1,56 +1,49 @@
 import {TestBed} from '@angular/core/testing';
 
 import {AuthService} from './auth.service';
-import {IUser} from '../model/user';
+import {IUser, User} from '../model/user';
+import {HttpClient} from '@angular/common/http';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {environment} from '../../../environments/environment';
 
 describe('AuthService', () => {
   let service: AuthService;
   const BEAVER_KEY = 'Beaver';
+  let httpClient: HttpClient;
+  let httpMock: HttpTestingController;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({imports: [HttpClientTestingModule]});
     service = TestBed.inject(AuthService);
+    httpClient = TestBed.inject(HttpClient);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should log message during login', () => {
-    spyOn(window.console, 'log');
-    service.login();
-    expect(window.console.log).toHaveBeenCalled();
-  });
-
   it('should place user info to local storage during login', () => {
-    service.login();
-    const item: IUser = JSON.parse(localStorage.getItem(BEAVER_KEY));
-    expect(item.id).toEqual(4);
+    service.login('user', 'password').then(() => {
+      const item: IUser = JSON.parse(localStorage.getItem(BEAVER_KEY));
+      expect(item.id).toEqual(1);
+    });
+    const loginRequest = httpMock.expectOne(environment.HOST_URL + '/auth/login');
+    loginRequest.flush('{token: "A_B_C_D_E_F"}');
+    expect(loginRequest.request.method).toEqual('POST');
+    const userInfoRequest = httpMock.expectOne(environment.HOST_URL + '/auth/userInfo');
+    userInfoRequest.flush('{id: 1,fakeToken: "A_B_C_D_E_F",name:{first: "AAA",last: "BBBB"},login: "login",password:"password"}');
+    expect(userInfoRequest.request.method).toEqual('POST');
   });
 
-
-  it('should log message during logout', () => {
-    spyOn(window.console, 'log');
-    service.logout();
-    expect(window.console.log).toHaveBeenCalled();
-  });
 
   it('should remove user info from local storage during logout', () => {
-    service.login();
-    const loggedUserInfo: IUser = JSON.parse(localStorage.getItem(BEAVER_KEY));
-    expect(loggedUserInfo.id).toEqual(4);
     service.logout();
     expect(localStorage.getItem(BEAVER_KEY)).toEqual(null);
   });
 
-  it('should log message during isAuthenticated', () => {
-    spyOn(window.console, 'log');
-    service.isAuthenticated();
-    expect(window.console.log).toHaveBeenCalled();
-  });
-
   it('should return true for authenticated user', () => {
-    service.login();
+    localStorage.setItem(BEAVER_KEY, 'sdfasfsd');
     expect(service.isAuthenticated()).toBeTrue();
   });
 
@@ -59,19 +52,13 @@ describe('AuthService', () => {
     expect(service.isAuthenticated()).toBeFalse();
   });
 
-  it('should log message during getUserInfo', () => {
-    spyOn(window.console, 'log');
-    service.getUserInfo();
-    expect(window.console.log).toHaveBeenCalled();
-  });
-
   it('should return user info for authenticated user', () => {
-    service.login();
+    localStorage.setItem(BEAVER_KEY, JSON.stringify(new User(4, 'Jonn', 'Smith')));
     const userInfo: IUser = service.getUserInfo();
     expect(userInfo.id).toEqual(4);
   });
 
-  it('should return null for non authenticated user', () => {
+  it('should return null user info for non authenticated user', () => {
     service.logout();
     expect(service.getUserInfo()).toEqual(null);
   });
