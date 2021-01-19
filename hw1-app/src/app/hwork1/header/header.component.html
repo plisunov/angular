@@ -5,7 +5,7 @@
   <div class="ap-header-right">
     <div class="user-info-container">
       <img *ngIf="isAuthenticated" class="user-icon" src="assets/img/user.png"/>
-      <label *ngIf="isAuthenticated" class="user-name">{{loggedUser.firstName}}, {{loggedUser.lastName}} </label>
+      <label *ngIf="isAuthenticated" class="user-name">{{lastName}} {{lastName}}</label>
     </div>
     <div class="user-logon-container">
       <button *ngIf="isAuthenticated" type="button" class="logout-button" (click)="onClick()">Log Out</button>

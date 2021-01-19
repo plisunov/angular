@@ -6,7 +6,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {AuthService} from './auth.service';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
 
 describe('AuthGuard', () => {
   let guard: AuthGuard;
@@ -34,8 +34,7 @@ describe('AuthGuard', () => {
     spyOn(authService, 'isAuthenticated').and.returnValue(true);
     const dummyRoute = {} as ActivatedRouteSnapshot;
     const fakeRouteState = {} as RouterStateSnapshot;
-    const canActivate= guard.canActivate(dummyRoute, fakeRouteState);
-    canActivate
+    const canActivate = guard.canActivate(dummyRoute, fakeRouteState);
     expect(canActivate).toBeInstanceOf(Observable);
   });
 

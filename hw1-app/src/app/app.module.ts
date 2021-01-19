@@ -9,6 +9,10 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {TokenInterceptor} from './hwork1/services/token.interceptor';
 import {LoaderInterceptor} from './hwork1/services/loader.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {StoreModule} from '@ngrx/store';
+import {userReducer} from './store/reducers/user.reducer';
+import {EffectsModule} from '@ngrx/effects';
+import {UserEffects} from './store/effects/user.effects';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     MatProgressSpinnerModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot({user: userReducer}),
+    EffectsModule.forRoot([UserEffects])
   ],
   providers: [
     {
@@ -37,5 +43,5 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
+export class AppModule1 {
 }

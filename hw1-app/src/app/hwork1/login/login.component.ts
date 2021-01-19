@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../services/auth.service';
-import {Router} from '@angular/router';
+import {Store} from '@ngrx/store';
+import {Login} from '../../store/actions/user.actions';
 
 @Component({
   selector: 'app-login',
@@ -12,13 +12,14 @@ export class LoginComponent implements OnInit {
   public name: string;
   public password: string;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private store: Store) {
   }
 
   ngOnInit(): void {
   }
 
   public login(): void {
-    this.authService.login(this.name, this.password).then(() => this.router.navigate(['/courses']));
+    this.store.dispatch(new Login({login: this.name, password: this.password}));
   }
+
 }
