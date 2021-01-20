@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {VideoItem} from '../model/video-item';
-import {FilterPipe} from '../pipes/filter.pipe';
 import {CourceService} from '../services/cource.service';
 import {Router} from '@angular/router';
+import {select, Store} from "@ngrx/store";
+import {selectDataLength, selectEndValue, selectStartValue, selectState} from "../../store/selectors/courses.selectors";
+import {ChangeSearchParams, DeleteCource, LoadCourses} from "../../store/actions/courses.actions";
 
 @Component({
   selector: 'app-videos',
@@ -11,27 +13,21 @@ import {Router} from '@angular/router';
 })
 export class VideosComponent implements OnInit {
 
-  public filteredVideoItems: VideoItem[];
+  public filteredVideoItemsl$ = this.store.select(selectState);
+
+  public datalength$ = this.store.select(selectDataLength);
 
   public video: VideoItem;
 
-  public filterPipe = new FilterPipe();
+  private searchString: string;
 
-  private searchString = '';
-
-  private pagingSize = 3;
-
-  private startIndex = 0;
-
-
-  constructor(private courcesService: CourceService,
+  constructor(private coursesService: CourceService,
+              private store: Store,
               private router: Router) {
   }
 
   ngOnInit(): void {
-    this.courcesService.getAll(this.startIndex, this.pagingSize, this.searchString).subscribe((list) => {
-      this.filteredVideoItems = list;
-    });
+    this.store.dispatch(new LoadCourses());
   }
 
   addItem(): void {
@@ -40,31 +36,24 @@ export class VideosComponent implements OnInit {
 
   onSearchStringChanged(searchString: string): void {
     this.searchString = searchString;
-    this.startIndex = 0;
-    this.courcesService.getAll(this.startIndex, this.pagingSize, this.searchString).subscribe((list) => {
-      this.filteredVideoItems = list;
-    });
+    let paging: number;
+    this.store.pipe(select(selectEndValue)).subscribe((padingSize: number) => paging = padingSize);
+    this.store.dispatch(new ChangeSearchParams(0, paging, searchString));
   }
 
   onShowMore(): void {
-    this.startIndex = (this.startIndex + this.pagingSize) + 1;
-    this.courcesService.getAll(this.startIndex, this.pagingSize, this.searchString).subscribe((list) => {
-      this.filteredVideoItems = list;
-    });
-
+    let startIndex: number;
+    this.store.pipe(select(selectStartValue)).subscribe((start: number) => startIndex = start);
+    let paging: number;
+    this.store.pipe(select(selectEndValue)).subscribe((padingSize: number) => paging = padingSize);
+    this.store.dispatch(new ChangeSearchParams((startIndex + paging + 1), paging, ''));
   }
 
   onDelete($event: number): void {
-    const deleteItem: VideoItem = this.filteredVideoItems.find(c => c.id === $event);
-    const confirmation = confirm('Are you really wan to delete ' + deleteItem.name + '?');
+    const confirmation = confirm('Are you really wan to delete course?');
     if (confirmation) {
       console.log('Deleted video id is ' + $event);
-      this.courcesService.delete($event);
-      this.startIndex = 0;
-      this.searchString = '';
-      this.courcesService.getAll(this.startIndex, this.pagingSize, this.searchString).subscribe((list) => {
-        this.filteredVideoItems = list;
-      });
+      this.store.dispatch(new DeleteCource($event));
     }
   }
 }

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Subject} from 'rxjs';
-import {debounceTime, filter} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, filter} from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
@@ -12,14 +12,15 @@ export class SearchComponent implements OnInit {
   @Output() searchStringOnChange = new EventEmitter<string>();
 
   public searchString: string;
-  public subject = new Subject<string>();
+  public searchString$ = new Subject<string>();
 
   constructor() {
   }
 
   ngOnInit(): void {
     this.searchString = '';
-    this.subject.pipe(filter(text => text.length >= 3),
+    this.searchString$.pipe(filter(text => text.length >= 3),
+      distinctUntilChanged(),
       debounceTime(500))
       .subscribe(() => this.searchStringOnChange.emit(this.searchString));
   }
@@ -28,7 +29,7 @@ export class SearchComponent implements OnInit {
     if (this.searchString.length === 0) {
       this.searchStringOnChange.emit(this.searchString);
     } else {
-      this.subject.next(this.searchString);
+      this.searchString$.next(this.searchString);
     }
   }
 

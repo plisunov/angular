@@ -13,6 +13,8 @@ import {StoreModule} from '@ngrx/store';
 import {userReducer} from './store/reducers/user.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {UserEffects} from './store/effects/user.effects';
+import {coursesReducer} from './store/reducers/courses.reducer';
+import {CoursesEffects} from './store/effects/courses.effects';
 
 @NgModule({
   declarations: [
@@ -26,8 +28,8 @@ import {UserEffects} from './store/effects/user.effects';
     MatProgressSpinnerModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    StoreModule.forRoot({user: userReducer}),
-    EffectsModule.forRoot([UserEffects])
+    StoreModule.forRoot({user: userReducer, courses: coursesReducer}),
+    EffectsModule.forRoot([UserEffects, CoursesEffects])
   ],
   providers: [
     {

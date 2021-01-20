@@ -3,17 +3,16 @@ import {Actions, Effect, ofType} from '@ngrx/effects';
 import {AuthService} from '../../hwork1/services/auth.service';
 import {Router} from '@angular/router';
 import {
-  EUserActions, Login,
+  EUserActions,
+  Login,
   LoginError,
   LoginSuccess,
   UserDataLoad,
   UserDataLoaded,
   UserFromLocalStorageLoaded
 } from '../actions/user.actions';
-import {catchError, distinctUntilChanged, map, mergeMap, switchMap, tap} from 'rxjs/operators';
-import {IUserLoginPayload} from '../states/user.state';
+import {catchError, distinctUntilChanged, map, switchMap, tap} from 'rxjs/operators';
 import {of} from 'rxjs';
-import {AuthToken} from '../../hwork1/model/auth-token';
 import {AuthUser} from '../../hwork1/model/auth-user';
 
 
