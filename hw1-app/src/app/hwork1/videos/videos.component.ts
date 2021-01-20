@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {VideoItem} from '../model/video-item';
 import {CourceService} from '../services/cource.service';
 import {Router} from '@angular/router';
-import {select, Store} from "@ngrx/store";
-import {selectDataLength, selectEndValue, selectStartValue, selectState} from "../../store/selectors/courses.selectors";
-import {ChangeSearchParams, DeleteCource, LoadCourses} from "../../store/actions/courses.actions";
+import {select, Store} from '@ngrx/store';
+import {selectDataLength, selectEndValue, selectStartValue, selectState} from '../../store/selectors/courses.selectors';
+import {ChangeSearchParams, DeleteCource, LoadCourses} from '../../store/actions/courses.actions';
 
 @Component({
   selector: 'app-videos',

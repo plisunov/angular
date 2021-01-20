@@ -1,5 +1,5 @@
 import {Action} from '@ngrx/store';
-import {IVideoItem} from "../../hwork1/model/video-item";
+import {IVideoItem} from '../../hwork1/model/video-item';
 
 export enum ECoursesActions {
   LoadCourses = '[Courses] LoadCourses',

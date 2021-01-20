@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {IVideoItem, VideoItem} from '../model/video-item';
+import {IVideoItem} from '../model/video-item';
 import {CourceService} from '../services/cource.service';
+import {Store} from '@ngrx/store';
+import {CourseCreate, CourseLoad, CourseSave, CourseUpdate} from '../../store/actions/course.actions';
+import {selectValue} from '../../store/selectors/course.selectors';
 
 @Component({
   selector: 'app-course',
@@ -12,10 +15,13 @@ export class CourseComponent implements OnInit {
 
   constructor(private path: ActivatedRoute,
               private courceService: CourceService,
+              private store: Store,
               private router: Router) {
   }
 
   public videoItem: IVideoItem;
+
+  public videoItem$ = this.store.select(selectValue);
 
   public videoIdStr: string;
 
@@ -25,20 +31,20 @@ export class CourseComponent implements OnInit {
     this.videoIdStr = this.path.snapshot.paramMap.get('id');
     if (this.videoIdStr !== 'new') {
       this.editMode = true;
-      this.courceService.get(Number(this.videoIdStr)).subscribe((item) => this.videoItem = item);
+      this.store.dispatch(new CourseLoad(Number(this.videoIdStr)));
     } else {
       this.editMode = false;
-      this.videoItem = new VideoItem(null, null, null, null, new Date(), false, null);
+      this.store.dispatch(new CourseCreate());
     }
+    this.videoItem$.subscribe((item: IVideoItem) => this.videoItem = item);
   }
 
   public onSave(): void {
     if (this.editMode) {
-      this.courceService.update(this.videoItem);
+      this.store.dispatch(new CourseUpdate(this.videoItem));
     } else {
-      this.courceService.create(this.videoItem).subscribe();
+      this.store.dispatch(new CourseSave(this.videoItem));
     }
-    this.router.navigate(['/courses']);
   }
 
   public onCancell(): void {

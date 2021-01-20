@@ -1,17 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {CourceService} from '../../hwork1/services/cource.service';
-import {distinctUntilChanged, map, switchMap} from "rxjs/operators";
-import {DeleteCource, ECoursesActions, LoadCourses, LoadCoursesCompleted} from "../actions/courses.actions";
-import {Store} from "@ngrx/store";
+import {distinctUntilChanged, map, switchMap} from 'rxjs/operators';
+import {DeleteCource, ECoursesActions, LoadCourses, LoadCoursesCompleted} from '../actions/courses.actions';
 
 
 @Injectable()
 export class CoursesEffects {
 
   constructor(private actions$: Actions,
-              private courceService: CourceService,
-              private store: Store) {
+              private courceService: CourceService) {
   }
 
   @Effect()
@@ -21,7 +19,7 @@ export class CoursesEffects {
     switchMap(() => {
         return this.courceService.getAll().pipe(
           map((courses) => new LoadCoursesCompleted(courses))
-        )
+        );
       }
     )
   );
@@ -43,6 +41,6 @@ export class CoursesEffects {
         );
       }
     )
-  )
+  );
 
 }

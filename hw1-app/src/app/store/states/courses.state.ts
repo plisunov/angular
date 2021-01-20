@@ -12,4 +12,4 @@ export const initialCoursesState: ICoursesState = {
   start: 0,
   paging: 3,
   searchString: ''
-}
+};
