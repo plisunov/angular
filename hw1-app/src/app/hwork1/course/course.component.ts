@@ -7,6 +7,7 @@ import {CourseCreate, CourseLoad, CourseSave, CourseUpdate} from '../../store/ac
 import {selectCourseName, selectValue} from '../../store/selectors/course.selectors';
 import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {dateValidator, durationValidator} from './course-form.validators';
+import {AuthorsService} from '../services/authors.service';
 
 @Component({
   selector: 'app-course',
@@ -17,6 +18,7 @@ export class CourseComponent implements OnInit {
 
   constructor(private path: ActivatedRoute,
               private courceService: CourceService,
+              private authorsService: AuthorsService,
               private store: Store,
               private router: Router) {
   }
@@ -49,6 +51,7 @@ export class CourseComponent implements OnInit {
       this.editMode = false;
       this.store.dispatch(new CourseCreate());
     }
+    this.authorsService.getAll().subscribe();
     this.videoItem$.subscribe((item: IVideoItem) => {
         this.formCourse.setValue({
           id: item.id,
@@ -58,7 +61,11 @@ export class CourseComponent implements OnInit {
           duration: item.length,
           authors: []
 
-        })
+        });
+        const authors = (item.authors || []).map(
+          (author) => new FormControl(author)
+        );
+        this.formCourse.setControl('authors', new FormArray(authors));
       }
     )
   }

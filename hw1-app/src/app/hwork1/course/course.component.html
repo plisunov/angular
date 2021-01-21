@@ -41,7 +41,7 @@
       </div>
     </div>
     <div>
-      <app-tags></app-tags>
+      <app-tags formArrayName="authors"></app-tags>
     </div>
     <div class="button-section">
       <input *ngIf="!formCourse.invalid" type="button" value="Save" (click)="onSave()">

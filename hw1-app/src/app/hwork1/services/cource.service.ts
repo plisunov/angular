@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {IVideoItem} from '../model/video-item';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {select, Store} from '@ngrx/store';
 import {selectEndValue, selectSearchValue, selectStartValue} from '../../store/selectors/courses.selectors';

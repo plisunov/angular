@@ -22,6 +22,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { LoaderComponent } from './loader/loader.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -43,7 +47,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     TagsComponent,
     NotFoundComponent,
     BreadcrumbComponent,
-    LoaderComponent],
+    LoaderComponent,
+  ],
   exports: [
     CoursesComponent
   ],
@@ -52,7 +57,11 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatChipsModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatAutocompleteModule,
   ]
 })
 export class Hwork1Module {

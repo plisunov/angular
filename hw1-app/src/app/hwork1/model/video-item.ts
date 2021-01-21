@@ -1,4 +1,4 @@
-import {IAutor} from './autor';
+import {ICourseAuthor} from './autor';
 
 export interface IVideoItem {
   id: number;
@@ -7,7 +7,7 @@ export interface IVideoItem {
   length: number;
   date: Date;
   isTopRated: boolean;
-  authors: IAutor[];
+  authors: ICourseAuthor[];
 }
 
 export class VideoItem implements IVideoItem {
@@ -17,6 +17,6 @@ export class VideoItem implements IVideoItem {
               public length: number,
               public date: Date,
               public isTopRated: boolean,
-              public authors: IAutor[]) {
+              public authors: ICourseAuthor[]) {
   }
 }

@@ -1,4 +1,19 @@
-<div>
-  <label for="tags" class="input-label">Authors</label>
-  <input class="input-text" id="tags" type="text">
-</div>
+<form>
+  <div>
+    <mat-form-field class="authors-list">
+      <mat-chip-list #chipList aria-label="Author selection">
+        <!--TODO-->
+        <mat-chip *ngFor="let author of allauthors; let i = index" [removable]="true" (removed)="removeAuthor(i)">
+          {{ author.name }}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <input [matChipInputFor]="chipList" [matChipInputAddOnBlur]="true" [matAutocomplete]="auto"/>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectAuthor($event)">
+          <mat-option *ngFor="let author  of allauthors " [value]="author">
+            {{ author.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-chip-list>
+    </mat-form-field>
+  </div>
+</form>
