@@ -14,14 +14,14 @@ import {TimeformatPipe} from '../../pipes/timeformat.pipe';
 })
 export class DurationComponent implements OnInit, ControlValueAccessor {
 
-  private onChange: any = () => {};
-
   private timeFormatPipe: TimeformatPipe;
 
   @Input()
   public duration: string;
 
   public durationFormatted: string;
+
+  private onChange: any = () => {};
 
   constructor() {
   }

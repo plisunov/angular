@@ -8,8 +8,8 @@ import {selectCourseName, selectValue} from '../../store/selectors/course.select
 import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {dateValidator, durationValidator} from './course-form.validators';
 import {AuthorsService} from '../services/authors.service';
-import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
-import {IAutor} from "../model/autor";
+import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
+import {IAutor} from '../model/autor';
 
 @Component({
   selector: 'app-course',
@@ -32,9 +32,9 @@ export class CourseComponent implements OnInit {
     date: new FormControl('', dateValidator()),
     duration: new FormControl('', durationValidator()),
     authors: new FormArray([])
-  })
+  });
 
-  public allauthors:IAutor[];
+  public allauthors: IAutor[];
 
   public videoItem: IVideoItem;
 
@@ -58,21 +58,20 @@ export class CourseComponent implements OnInit {
     this.authorsService.getAll().subscribe();
     this.authorsService.getAll().subscribe((items: IAutor[]) => this.allauthors = items);
     this.videoItem$.subscribe((item: IVideoItem) => {
-        this.formCourse.setValue({
-          id: item.id,
-          name: item.name,
-          description: item.description,
-          date: new Date(item.date).toLocaleDateString(),
-          duration: item.length,
-          authors: []
+      this.formCourse.setValue({
+        id: item.id,
+        name: item.name,
+        description: item.description,
+        date: new Date(item.date).toLocaleDateString(),
+        duration: item.length,
+        authors: []
 
-        });
-        const authors = (item.authors || []).map(
-          (author) => new FormControl(author)
-        );
-        this.formCourse.setControl('authors', new FormArray(authors));
-      }
-    )
+      });
+      const authors = (item.authors || []).map(
+        (author) => new FormControl(author)
+      );
+      this.formCourse.setControl('authors', new FormArray(authors));
+    });
   }
 
   public onSave(): void {

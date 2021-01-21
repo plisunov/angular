@@ -62,7 +62,7 @@ export class CourseEffects {
   updateCourseCompleted$ = this.actions$.pipe(
     ofType(ECourseActions.CourseSaved),
     distinctUntilChanged(),
-    tap(() => this.router.navigate(['/courses']))
+    map(() => this.router.navigate(['/courses']))
   );
 
 }

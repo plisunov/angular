@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component, forwardRef, Input, OnInit} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {Component, forwardRef, Input, OnInit} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
   selector: 'app-datepicker',
@@ -17,7 +17,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   public courseDate: string;
 
   private onChange: any = () => {
-  };
+  }
 
   constructor() {
   }
@@ -25,7 +25,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   ngOnInit(): void {
   }
 
-  onChangeDate():void {
+  onChangeDate(): void {
     this.onChange(this.courseDate);
   }
 

@@ -11,8 +11,8 @@ export class AuthorsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getAll() :Observable<IAutor[]> {
-    return this.httpClient.get<IAutor[]>(environment.HOST_URL + '/authors/' )
+  public getAll(): Observable<IAutor[]> {
+    return this.httpClient.get<IAutor[]>(environment.HOST_URL + '/authors/');
   }
 
 }
