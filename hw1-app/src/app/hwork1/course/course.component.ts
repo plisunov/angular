@@ -8,6 +8,8 @@ import {selectCourseName, selectValue} from '../../store/selectors/course.select
 import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {dateValidator, durationValidator} from './course-form.validators';
 import {AuthorsService} from '../services/authors.service';
+import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
+import {IAutor} from "../model/autor";
 
 @Component({
   selector: 'app-course',
@@ -32,6 +34,8 @@ export class CourseComponent implements OnInit {
     authors: new FormArray([])
   })
 
+  public allauthors:IAutor[];
+
   public videoItem: IVideoItem;
 
   public videoItem$ = this.store.select(selectValue);
@@ -52,6 +56,7 @@ export class CourseComponent implements OnInit {
       this.store.dispatch(new CourseCreate());
     }
     this.authorsService.getAll().subscribe();
+    this.authorsService.getAll().subscribe((items: IAutor[]) => this.allauthors = items);
     this.videoItem$.subscribe((item: IVideoItem) => {
         this.formCourse.setValue({
           id: item.id,
@@ -90,6 +95,14 @@ export class CourseComponent implements OnInit {
     this.router.navigate(['/courses']);
   }
 
+  public selectAuthor($event: MatAutocompleteSelectedEvent): void {
+    this.authors.push(new FormControl($event.option.value));
+  }
+
+  public removeAuthor(index): void {
+    this.authors.removeAt(index);
+  }
+
   onDurationChange($event: number): void {
     this.videoItem.length = $event;
   }
@@ -110,4 +123,7 @@ export class CourseComponent implements OnInit {
     return this.formCourse.get('date');
   }
 
+  get authors(): FormArray {
+    return this.formCourse.get('authors') as FormArray;
+  }
 }

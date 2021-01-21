@@ -41,8 +41,23 @@
       </div>
     </div>
     <div>
-      <app-tags formArrayName="authors"></app-tags>
+      <label class="input-label">Authors</label>
+      <mat-form-field class="authors-list">
+        <mat-chip-list #chipList formArrayName="authors">
+          <mat-chip *ngFor="let author of authors.controls; let i = index" [removable]="true" (removed)="removeAuthor(i)">
+            {{ author.value.name }}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+          <input [matChipInputFor]="chipList" [matChipInputAddOnBlur]="true" [matAutocomplete]="auto"/>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectAuthor($event)">
+            <mat-option *ngFor="let author  of allauthors " [value]="author">
+              {{ author.name }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-chip-list>
+      </mat-form-field>
     </div>
+
     <div class="button-section">
       <input *ngIf="!formCourse.invalid" type="button" value="Save" (click)="onSave()">
       <input type="button" value="Cancel" (click)="onCancell()">

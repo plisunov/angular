@@ -25,6 +25,10 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   ngOnInit(): void {
   }
 
+  onChangeDate():void {
+    this.onChange(this.courseDate);
+  }
+
   writeValue(value: string): void {
     this.courseDate = value;
     this.onChange(this.courseDate);

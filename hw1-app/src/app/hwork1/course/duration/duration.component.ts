@@ -1,6 +1,6 @@
 import {Component, forwardRef, Input, OnInit} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {TimeformatPipe} from "../../pipes/timeformat.pipe";
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {TimeformatPipe} from '../../pipes/timeformat.pipe';
 
 @Component({
   selector: 'app-duration',
