@@ -38,3 +38,10 @@
   height: 30px;
   text-align: center;
 }
+
+.validation-error-message {
+  color: red;
+  font-size: 9px;
+  margin-left: 10px;
+}
+
