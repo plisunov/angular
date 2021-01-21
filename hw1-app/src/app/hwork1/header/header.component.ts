@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {IUser} from '../model/user';
 import {AuthService} from '../services/auth.service';
-import {Router} from '@angular/router';
+import {select, Store} from '@ngrx/store';
+import {LogOut} from '../../store/actions/user.actions';
+import {selectUser} from '../../store/selectors/user.selectors';
+import {IUserState} from '../../store/states/user.state';
 
 @Component({
   selector: 'app-header',
@@ -11,20 +13,23 @@ import {Router} from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   public isAuthenticated: boolean;
+  public lastName: string;
+  public firstName: string;
 
-  public loggedUser: IUser;
+  public loggedUser$ = this.store.pipe(select(selectUser)).subscribe((user: IUserState) => {
+    this.lastName = user.user.lastName;
+    this.firstName = user.user.firstName;
+  });
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private store: Store) {
   }
 
   ngOnInit(): void {
     this.isAuthenticated = this.authService.isAuthenticated();
-    this.loggedUser = this.authService.getUserInfo();
   }
 
   onClick(): void {
-    this.authService.logout();
-    this.router.navigate(['/login']);
+    this.store.dispatch(new LogOut());
   }
 
 }

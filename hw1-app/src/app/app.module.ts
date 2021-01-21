@@ -8,7 +8,15 @@ import {Hwork1Module} from './hwork1/hwork1.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {TokenInterceptor} from './hwork1/services/token.interceptor';
 import {LoaderInterceptor} from './hwork1/services/loader.interceptor';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {StoreModule} from '@ngrx/store';
+import {userReducer} from './store/reducers/user.reducer';
+import {EffectsModule} from '@ngrx/effects';
+import {UserEffects} from './store/effects/user.effects';
+import {coursesReducer} from './store/reducers/courses.reducer';
+import {CoursesEffects} from './store/effects/courses.effects';
+import {courseReducer} from './store/reducers/course.reducer';
+import {CourseEffects} from './store/effects/course.effects';
 
 @NgModule({
   declarations: [
@@ -20,8 +28,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     Hwork1Module,
     HttpClientModule,
     MatProgressSpinnerModule,
-    BrowserAnimationsModule
-    HttpClientModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    StoreModule.forRoot({user: userReducer, courses: coursesReducer, course: courseReducer}),
+    EffectsModule.forRoot([UserEffects, CoursesEffects, CourseEffects])
   ],
   providers: [
     {
@@ -37,5 +47,5 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
+export class AppModule1 {
 }
