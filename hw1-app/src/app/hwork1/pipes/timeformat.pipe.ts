@@ -5,15 +5,16 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class TimeformatPipe implements PipeTransform {
 
-  transform(minutes: number): string {
-    if (Number.isNaN(minutes)) {
+  transform(minutes: string): string {
+    const min = Number.parseInt(minutes, 10);
+    if (Number.isNaN(min)) {
       return '';
-    } else if (minutes < 60) {
-      return `${minutes} min`;
-    } else if (minutes % 60 === 0) {
-      return `${Math.floor(minutes / 60)} h`;
+    } else if (min < 60) {
+      return `${min} min`;
+    } else if (min % 60 === 0) {
+      return `${Math.floor(min / 60)} h`;
     } else {
-      return `${Math.floor(minutes / 60)} h ${minutes % 60} min`;
+      return `${Math.floor(min / 60)} h ${min % 60} min`;
     }
   }
 }

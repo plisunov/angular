@@ -13,6 +13,12 @@
   height: 30px;
 }
 
+.validation-error-message {
+  color: red;
+  font-size: 9px;
+  margin-left: 10px;
+}
+
 .input-teat-area {
   display: block;
   margin-left: 5px;

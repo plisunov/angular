@@ -7,7 +7,7 @@ import {FooterComponent} from './footer/footer.component';
 import {VideoItemComponent} from './video-item/video-item.component';
 import {SearchComponent} from './search/search.component';
 import {LogoComponent} from './logo/logo.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CourseComponent} from './course/course.component';
 import {RouterModule} from '@angular/router';
 import {BorderStyleDirective} from './video-item/border-style.directive';
@@ -50,6 +50,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule,
     MatProgressSpinnerModule
   ]

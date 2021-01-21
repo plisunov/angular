@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {IVideoItem} from '../model/video-item';
+import {IVideoItem, VideoItem} from '../model/video-item';
 import {CourceService} from '../services/cource.service';
 import {Store} from '@ngrx/store';
 import {CourseCreate, CourseLoad, CourseSave, CourseUpdate} from '../../store/actions/course.actions';
-import {selectValue} from '../../store/selectors/course.selectors';
+import {selectCourseName, selectValue} from '../../store/selectors/course.selectors';
+import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {dateValidator, durationValidator} from './course-form.validators';
 
 @Component({
   selector: 'app-course',
@@ -19,9 +21,20 @@ export class CourseComponent implements OnInit {
               private router: Router) {
   }
 
+  public formCourse = new FormGroup({
+    id: new FormControl(''),
+    name: new FormControl('', [Validators.maxLength(50), Validators.required]),
+    description: new FormControl('', Validators.maxLength(500)),
+    date: new FormControl('', dateValidator()),
+    duration: new FormControl('', durationValidator()),
+    authors: new FormArray([])
+  })
+
   public videoItem: IVideoItem;
 
   public videoItem$ = this.store.select(selectValue);
+
+  public courseName$ = this.store.select(selectCourseName);
 
   public videoIdStr: string;
 
@@ -36,14 +49,33 @@ export class CourseComponent implements OnInit {
       this.editMode = false;
       this.store.dispatch(new CourseCreate());
     }
-    this.videoItem$.subscribe((item: IVideoItem) => this.videoItem = item);
+    this.videoItem$.subscribe((item: IVideoItem) => {
+        this.formCourse.setValue({
+          id: item.id,
+          name: item.name,
+          description: item.description,
+          date: new Date(item.date).toLocaleDateString(),
+          duration: item.length,
+          authors: []
+
+        })
+      }
+    )
   }
 
   public onSave(): void {
+    const formValue = this.formCourse.value;
+    const item = new VideoItem(formValue.id,
+      formValue.name,
+      formValue.description,
+      formValue.duration,
+      formValue.date,
+      false,
+      formValue.authors);
     if (this.editMode) {
-      this.store.dispatch(new CourseUpdate(this.videoItem));
+      this.store.dispatch(new CourseUpdate(item));
     } else {
-      this.store.dispatch(new CourseSave(this.videoItem));
+      this.store.dispatch(new CourseSave(item));
     }
   }
 
@@ -54,4 +86,21 @@ export class CourseComponent implements OnInit {
   onDurationChange($event: number): void {
     this.videoItem.length = $event;
   }
+
+  get nameCtrl(): AbstractControl {
+    return this.formCourse.get('name');
+  }
+
+  get descriptionCtrl(): AbstractControl {
+    return this.formCourse.get('description');
+  }
+
+  get durationCtrl(): AbstractControl {
+    return this.formCourse.get('duration');
+  }
+
+  get dateCtrl(): AbstractControl {
+    return this.formCourse.get('date');
+  }
+
 }
