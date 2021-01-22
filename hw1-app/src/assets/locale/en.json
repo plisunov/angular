@@ -1,0 +1,24 @@
+{
+  "FORMS": {
+    "HEADER_TITLE": "Video courses",
+    "HEADER_LOGOUT": "Log Out",
+    "COURSE_LIST": {
+      "ADD_COURSE": "Add Course",
+      "LOAD_COURSE": "Show more",
+      "NO_DATA": "No data. Feel free to add new course",
+      "EDIT_COURSE": "Edit",
+      "DELETE_COURSE": "Delete"
+    },
+    "LOGIN": {
+      "LOGIN_LABEL": "Login",
+      "LOGIN_VALIDATION_MESSAGE": "Login is required",
+      "PASSWORD_LABEL": "Password",
+      "PASSWORD_VALIDATION_MESSAGE": "Password is required",
+      "BUTTON": "Login"
+    }
+  },
+  "LANGUAGES": {
+    "EN": "English",
+    "RU": "Russian"
+  }
+}

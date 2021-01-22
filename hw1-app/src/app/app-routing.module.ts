@@ -5,6 +5,7 @@ import {LoginComponent} from './hwork1/login/login.component';
 import {CoursesComponent} from './hwork1/courses/courses.component';
 import {NotFoundComponent} from './hwork1/not-found/not-found.component';
 import {AuthGuard} from './hwork1/services/auth.guard';
+import {TranslateModule} from '@ngx-translate/core';
 
 const routes: Routes = [
   {path: 'courses/:id', component: CourseComponent, canActivate: [AuthGuard]},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: '**', component: NotFoundComponent}];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes),
+    TranslateModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

@@ -16,20 +16,25 @@
 }
 
 .ap-header-left {
-  width: 75%;
+  width: 60%;
   float: left;
 }
 
 .ap-header-right {
-  width: 25%;
+  width: 40%;
   float: left;
 }
+.select-locale{
+  float: left;
+  margin-top: 10px;
+  width: 20%;
+}
 .user-info-container {
-  width: 60%;
+  width: 50%;
   float: left;
 }
 .user-logon-container {
-  width: 40%;
+  width: 30%;
   float: left;
 }
 

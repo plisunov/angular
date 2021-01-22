@@ -25,6 +25,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {TranslateModule} from "@ngx-translate/core";
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatFormFieldModule,
     MatIconModule,
     MatAutocompleteModule,
+    TranslateModule
   ]
 })
 export class Hwork1Module {
