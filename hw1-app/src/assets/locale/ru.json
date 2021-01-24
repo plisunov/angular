@@ -1,0 +1,24 @@
+{
+  "FORMS": {
+    "HEADER_TITLE": "Видео курсы",
+    "HEADER_LOGOUT": "Выйти",
+    "COURSE_LIST": {
+      "ADD_COURSE": "Добавить курс",
+      "LOAD_COURSE": "Показать еще",
+      "NO_DATA": "Нет доступных курсов",
+      "EDIT_COURSE": "Редактировать",
+      "DELETE_COURSE": "Удалить"
+    },
+    "LOGIN": {
+      "LOGIN_LABEL": "Имя",
+      "LOGIN_VALIDATION_MESSAGE": "Поле логин обязательное",
+      "PASSWORD_LABEL": "Пароль",
+      "PASSWORD_VALIDATION_MESSAGE": "Поле пароль обязательное",
+      "BUTTON": "Войти"
+    }
+  },
+  "LANGUAGES": {
+    "EN": "English",
+    "RU": "Russian"
+  }
+}

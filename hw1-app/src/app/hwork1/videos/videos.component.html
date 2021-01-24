@@ -1,17 +1,17 @@
 <div>
   <app-search (searchStringOnChange)="onSearchStringChanged($event)"></app-search>
   <div>
-    <button type="button" class="add-button" (click)="addItem()">+Add Cource</button>
+    <button type="button" class="add-button" (click)="addItem()">{{ 'FORMS.COURSE_LIST.ADD_COURSE' | translate}}</button>
   </div>
   <div  *ngIf="{length: datalength$| async}.length" class="item-list">
     <app-video-item (deleteEvent)="onDelete($event)" *ngFor="let video of filteredVideoItemsl$ | async " [video]="video"></app-video-item>
     <div *ngIf="{length: datalength$| async}.length >= 3" class="add-more-sector">
-      <button class="add-more-button" type="button" (click)="onShowMore()">Load more</button>
+      <button class="add-more-button" type="button" (click)="onShowMore()">{{ 'FORMS.COURSE_LIST.LOAD_COURSE' | translate}}</button>
     </div>
   </div>
   <div >
     <div *ngIf="{length: datalength$| async}.length === 0" class="add-more-sector">
-      <p class="no-more-label">No data. Feel free to add new course</p>
+      <p class="no-more-label">{{ 'FORMS.COURSE_LIST.NO_DATA' | translate}}</p>
     </div>
   </div>
 </div>
