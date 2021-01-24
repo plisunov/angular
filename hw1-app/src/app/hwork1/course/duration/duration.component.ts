@@ -1,25 +1,53 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, forwardRef, Input, OnInit} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {TimeformatPipe} from '../../pipes/timeformat.pipe';
 
 @Component({
   selector: 'app-duration',
   templateUrl: './duration.component.html',
-  styleUrls: ['../course.component.css', './duration.component.css']
+  styleUrls: ['../course.component.css', './duration.component.css'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => DurationComponent),
+    multi: true,
+  }]
 })
-export class DurationComponent implements OnInit {
+export class DurationComponent implements OnInit, ControlValueAccessor {
+
+  private timeFormatPipe: TimeformatPipe;
 
   @Input()
-  public duration: number;
+  public duration: string;
 
-  @Output()
-  public changeEvent: EventEmitter<number> = new EventEmitter<number>();
+  public durationFormatted: string;
+
+  private onChange: any = () => {};
 
   constructor() {
   }
 
   ngOnInit(): void {
+    this.timeFormatPipe = new TimeformatPipe();
+    if (this.duration) {
+      this.onChangeDuration();
+    }
   }
 
   onChangeDuration(): void {
-    this.changeEvent.emit(this.duration);
+    this.durationFormatted = this.timeFormatPipe.transform(this.duration);
+    this.onChange(this.duration);
   }
+
+  writeValue(value: string): void {
+    this.duration = value;
+    this.onChangeDuration();
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+  }
+
 }

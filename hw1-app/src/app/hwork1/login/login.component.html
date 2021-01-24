@@ -2,14 +2,20 @@
 <div class="login-back">
   <div class="dataDiv">
     <div class="nameInput">
-      <label for="name">Login </label>
-      <input id="name" class="inputField" [(ngModel)]="name">
+      <label for="name">{{ 'FORMS.LOGIN.LOGIN_LABEL' | translate}} </label>
+      <input id="name" name = "login" #login="ngModel" class="inputField" [(ngModel)]="name" required>
+      <div *ngIf="login.invalid || login.pristine" class="validation-error-message">
+        {{ 'FORMS.LOGIN.LOGIN_VALIDATION_MESSAGE' | translate}}
+      </div>
     </div>
     <div class="passwordInput">
-      <label for="password">Password </label>
-      <input type="password" id="password" class="inputField" [(ngModel)]="password">
+      <label for="password">{{ 'FORMS.LOGIN.PASSWORD_LABEL' | translate}} </label>
+      <input type="password" id="password" #pass="ngModel" class="inputField" [(ngModel)]="password">
+      <div *ngIf="pass.invalid || pass.pristine" class="validation-error-message">
+        {{ 'FORMS.LOGIN.PASSWORD_VALIDATION_MESSAGE' | translate}}
+      </div>
     </div>
-    <button class="loginButton" (click)="login()">Login</button>
+    <button *ngIf="!login.invalid&&!pass.invalid" class="loginButton" (click)="loginUser()">{{ 'FORMS.LOGIN.BUTTON' | translate}}</button>
   </div>
 </div>
 <app-footer></app-footer>

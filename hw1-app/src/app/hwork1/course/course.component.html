@@ -1,21 +1,68 @@
 <app-header></app-header>
-<app-breadcrumb courseName="{{videoItem.name}}"></app-breadcrumb>
-<div>
+<app-breadcrumb courseName="{{courseName$|async}}"></app-breadcrumb>
+<form [formGroup]="formCourse">
   <div>
-    <label class="input-label" for="courseName">Title</label>
-    <input class="input-text" id="courseName" [(ngModel)]="videoItem.name">
-  </div>
-  <div>
-    <label class="input-label" for="courseDescription">Description</label>
-    <textarea class="input-teat-area" id="courseDescription" [(ngModel)]="videoItem.description"></textarea>
-  </div>
-  <app-datepicker [courseDate]="videoItem.date"></app-datepicker>
-  <app-duration (changeEvent)="onDurationChange($event)" [duration]="videoItem.length"></app-duration>
-  <app-tags></app-tags>
-  <div class="button-section">
-    <input type="button" value="Save" (click)="onSave()">
-    <input type="button" value="Cancel" (click)="onCancell()">
+    <div>
+      <input type="hidden" name="id" formControlName="id"/>
+    </div>
+    <div class="form-group">
+      <label class="input-label" for="courseName">Title</label>
+      <input type="text" class="input-text" id="courseName" name="courseName" formControlName="name"
+             placeholder="Course name">
+      <div *ngIf="nameCtrl.invalid " class="alert alert-danger">
+        <div *ngIf="nameCtrl.errors.maxlength" class="validation-error-message">
+          The course name should not be longer than 50
+        </div>
+        <div *ngIf="nameCtrl.errors.required" class="validation-error-message">
+          The course name is mandatory
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="input-label" for="courseDescription">Description</label>
+      <textarea class="input-teat-area" id="courseDescription" formControlName="description"
+                placeholder="Course description"></textarea>
+      <div *ngIf="descriptionCtrl.invalid " class="alert alert-danger">
+        <div *ngIf="descriptionCtrl.errors.maxlength" class="validation-error-message">
+          The course description should not be longer than 500
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <app-datepicker formControlName="date"></app-datepicker>
+      <div *ngIf="dateCtrl.errors?.dateFormat" class="validation-error-message">
+        The Course date format is incorrect. Please use MM/dd/yyyy
+      </div>
+    </div>
+    <div class="form-group">
+      <app-duration formControlName="duration"></app-duration>
+      <div *ngIf="durationCtrl.errors?.duration" class="validation-error-message">
+        The Course duration value is incorrect
+      </div>
+    </div>
+    <div>
+      <label class="input-label">Authors</label>
+      <mat-form-field class="authors-list">
+        <mat-chip-list #chipList formArrayName="authors">
+          <mat-chip *ngFor="let author of authors.controls; let i = index" [removable]="true" (removed)="removeAuthor(i)">
+            {{ author.value.name }}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+          <input [matChipInputFor]="chipList" [matChipInputAddOnBlur]="true" [matAutocomplete]="auto"/>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectAuthor($event)">
+            <mat-option *ngFor="let author  of allauthors " [value]="author">
+              {{ author.name }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-chip-list>
+      </mat-form-field>
+    </div>
 
+    <div class="button-section">
+      <input *ngIf="!formCourse.invalid" type="button" value="Save" (click)="onSave()">
+      <input type="button" value="Cancel" (click)="onCancell()">
+
+    </div>
   </div>
-</div>
+</form>
 <app-footer></app-footer>

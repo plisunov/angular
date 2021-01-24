@@ -2,6 +2,6 @@
   <label class="input-label" for="duration-wrap">Duration</label>
   <div id="duration-wrap" class="input-text">
     <input type="text" id="duration" [(ngModel)]="duration" (change)="onChangeDuration()">
-    <label for="duration">{{duration|timeformat}}</label>
+    <label for="duration">{{durationFormatted}}</label>
   </div>
 </div>

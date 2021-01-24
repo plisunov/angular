@@ -7,7 +7,7 @@ import {FooterComponent} from './footer/footer.component';
 import {VideoItemComponent} from './video-item/video-item.component';
 import {SearchComponent} from './search/search.component';
 import {LogoComponent} from './logo/logo.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CourseComponent} from './course/course.component';
 import {RouterModule} from '@angular/router';
 import {BorderStyleDirective} from './video-item/border-style.directive';
@@ -17,11 +17,15 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { LoginComponent } from './login/login.component';
 import { DatepickerComponent } from './course/datepicker/datepicker.component';
 import { DurationComponent } from './course/duration/duration.component';
-import { TagsComponent } from './course/tags/tags.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { LoaderComponent } from './loader/loader.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {TranslateModule} from "@ngx-translate/core";
 
 
 @NgModule({
@@ -40,18 +44,24 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     LoginComponent,
     DatepickerComponent,
     DurationComponent,
-    TagsComponent,
     NotFoundComponent,
     BreadcrumbComponent,
-    LoaderComponent],
+    LoaderComponent,
+  ],
   exports: [
     CoursesComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatChipsModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    TranslateModule
   ]
 })
 export class Hwork1Module {
